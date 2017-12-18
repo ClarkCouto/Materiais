@@ -1,0 +1,108 @@
+Funciona
+http://www.c-sharpcorner.com/UploadFile/rahul4_saxena/export-data-table-to-excel-in-Asp-Net-mvc-4/
+
+        public void ExportDataSet2()
+        {
+            var clientes = _clienteService.Get(prospecExpr.Compile());
+            Contatos umContato;
+            
+            DataTable dt = new DataTable();
+            DataColumn colunas =
+                dt.Columns.Add("Nome", typeof(String));
+                dt.Columns.Add("Sobrenome", typeof(String));
+                dt.Columns.Add("Telefone", typeof(String));
+                dt.Columns.Add("Email", typeof(String));
+
+            DataRow linha = dt.NewRow();
+
+            foreach (Clientes cliente in clientes)
+            {
+                if (cliente.Contatos.Count() > 0)
+                {
+                    linha = dt.NewRow();
+                    umContato = cliente.Contatos.FirstOrDefault();
+                    linha["Nome"] = umContato.Nome;
+                    linha["Sobrenome"] = umContato.SobreNome;
+                    linha["Telefone"] = umContato.Telefone1 == null || umContato.Telefone1.Equals("") ? "" : umContato.Telefone1;
+                    linha["Email"] = umContato.Email1 == null || umContato.Email1.Equals("") ? "" : umContato.Email1;
+                    dt.Rows.Add(linha);
+                }
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt, "Clientes.xlsx");
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename= Clientes.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }            
+        }
+
+
+
+DA UM ERRO
+
+ DataTable dt = new DataTable();
+            DataRow dr;
+            //cria o schema 
+            dt.Columns.Add("Codigo"); dt.Columns.Add("Nome");
+            //Imclui dados
+            dr = dt.NewRow(); dr["Codigo"] = "1"; dr["Nome"] = "Macoratti"; dt.Rows.Add(dr);
+            dr = dt.NewRow(); dr["Codigo"] = "2"; dr["Nome"] = "Miriam"; dt.Rows.Add(dr);
+            dr = dt.NewRow(); dr["Codigo"] = "3"; dr["Nome"] = "Jessica"; dt.Rows.Add(dr);
+            dr = dt.NewRow(); dr["Codigo"] = "4"; dr["Nome"] = "Jefferson"; dt.Rows.Add(dr);
+            dr = dt.NewRow(); dr["Codigo"] = "5"; dr["Nome"] = "Janice"; dt.Rows.Add(dr);
+
+            string XlsPath = Server.MapPath(@"~/Add_data/Clientes.xls");
+            string attachment = string.Empty;
+            if (XlsPath.IndexOf("\\") != -1)
+            {
+                string[] strFileName = XlsPath.Split(new char[] { '\\' });
+                attachment = "attachment; filename=" + strFileName[strFileName.Length - 1];
+            }
+            else
+                attachment = "attachment; filename=" + XlsPath;
+            try
+            {
+                Response.ClearContent();
+                Response.AddHeader("content-disposition", attachment);
+                Response.ContentType = "application/vnd.ms-excel";
+                string tab = string.Empty;
+
+                foreach (DataColumn datacol in dt.Columns)
+                {
+                    Response.Write(tab + datacol.ColumnName);
+                    tab = "\t";
+                }
+                Response.Write("\n");
+
+                foreach (DataRow datarol in dt.Rows)
+                {
+                    tab = "";
+                    for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        Response.Write(tab + Convert.ToString(datarol[j]));
+                        tab = "\t";
+                    }
+
+                    Response.Write("\n");
+                }
+                Response.End();
+            }
+            catch (Exception ex)
+            {
+                //Response.Write(ex.Message);
+            }

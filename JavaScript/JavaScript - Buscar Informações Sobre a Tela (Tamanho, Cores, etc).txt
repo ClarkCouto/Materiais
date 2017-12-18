@@ -1,0 +1,60 @@
+BUSCAR TAMANHO QUE ESTA SENDO UTILIZADA
+For Internet Explorer, Chrome, Firefox, Opera, and Safari:
+
+window.innerHeight - the inner height of the browser window
+window.innerWidth - the inner width of the browser window
+For Internet Explorer 8, 7, 6, 5:
+
+document.documentElement.clientHeight
+document.documentElement.clientWidth
+or
+document.body.clientHeight
+document.body.clientWidth
+
+SOLUÇÃO PARA TODOS O BROWSERS
+
+var w = window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+var h = window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+
+==================================================================================================================
+MOSTRAR WIDTH E HEIGHT EM PIXELS
+TOTAL
+document.getElementById("demo").innerHTML =
+"Screen Width: " + screen.width;
+
+document.getElementById("demo").innerHTML =
+"Screen Height: " + screen.height;
+
+DISPONÍVEL (RETIRANDO BARRAS DE TAREFAS, ETC)
+document.getElementById("demo").innerHTML =
+"Available Screen Width: " + screen.availWidth;
+
+document.getElementById("demo").innerHTML =
+"Available Screen Height: " + screen.availHeight;
+==================================================================================================================
+MOSTRAR QUANTIDADE DE CORES DO MONITOR
+
+document.getElementById("demo").innerHTML = 
+"Screen Color Depth: " + screen.colorDepth; 24bits/32bits
+==================================================================================================================
+INFORMAÇÕES SOBRE O CAMINHO QUE ESTÁ NA BARRA DE ENDEREÇOS
+
+location.href ou document.URL	returns the href (URL) of the current page
+window.location.hostname 	returns the domain name of the web host
+window.location.pathname 	returns the path and filename of the current page
+window.location.protocol 	returns the web protocol used (http:// or https://)
+window.location.assign 		loads a new document
+==================================================================================================================
+VOLTAR OU AVANÇAR PÁGINA
+
+history.back()		- same as clicking back in the browser
+history.forward()	- same as clicking forward - Desde que já tenha sido visitada uma página posterior
+==================================================================================================================
+VERIFICAR SE OS COOKIES ESTÃO HABILITADOS
+
+navigator.cookieEnabled; - retorna true or false

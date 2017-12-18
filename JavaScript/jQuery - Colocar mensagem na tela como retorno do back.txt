@@ -1,0 +1,7 @@
+//Colocar mensagem na tela como retorno do back
+	***NO BACK
+		TempData["message"] = "Mensagem!";
+
+	***NA VIEW
+		//Onde for para aparecer a mensagem colocar
+		<span id="alert-err" class="text-danger">@TempData["message"]<br /> </span>

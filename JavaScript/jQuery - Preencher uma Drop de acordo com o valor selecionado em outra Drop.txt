@@ -1,0 +1,84 @@
+PREENCHER CAMPOS DE ACORDO COM A OPCAO SELECIONADA EM UMA DROPDOWN
+
+***NO JAVASCRIPT
+$('#InstrumentosGeralOriginal_Id').change(function () {
+    var idInstrumentoOriginal = $("#InstrumentosGeralOriginal_Id").val();
+    if (idInstrumentoOriginal.length > 0) {
+        $.getJSON(window.rootUrl + 'Reagente/GetDadosIntrumentoOriginal', {
+            idInstrumentoOriginal: idInstrumentoOriginal,
+        })
+        .done(function (data) {
+            //REAGENTE
+            //DEPOIS TEM QUE GERAR O COD INTERNO AUTOMATICAMENTE
+            $("#CodInterno").val(data[0].CodInterno);
+            $("#Reagentes_Reagente").val(data[0].Reagente);
+            $("#Reagentes_CAS").val(data[0].CAS);
+            $("#Marca_Id").val(data[0].Marca_Id);
+            $("#marcaAnterior").val($("#Marca_Id").val());
+            //$("#Ativo").val(data[0].Ativo);
+            $("#Localizacao").val(data[0].Localizacao);
+            $("#NumeroCatalogo").val(data[0].NumeroCatalogo);
+            $("#TipoClienteFabricante").val(data[0].TipoClienteFabricante);
+            buscarClientes("TipoClienteFabricante", $("#TipoClienteFabricante").val());
+            //Nao esta funcionando ainda
+            $("#Fabricante_Id").val(data[0].Fabricante_Id);
+            $("#Fabricante_Id").trigger('chosen:updated');
+            $("#TipoClienteFornecedor").val(data[0].TipoClienteFornecedor);
+            buscarClientes("TipoClienteFornecedor", $("#TipoClienteFornecedor").val());
+            //Nao esta funcionando ainda
+            $("#Fornecedor_Id").val(data[0].Fornecedor_Id);
+            //OUTRAS INFORMAÇÔES
+            $("#Reagentes_PesoMolecular").val(data[0].PesoMolecular),
+            $("#Reagentes_Densidade").val(data[0].Densidade),
+            $("#Reagentes_Concentracao").val(data[0].Concentracao),
+            $("#Unidade_Id").val(data[0].Unidade),
+            $("#Reagentes_TemperaturaMin").val(data[0].TemperaturaMin),
+            $("#Reagentes_TemperaturaMax").val(data[0].TemperaturaMax),
+            $("#Reagentes_UmidadeMin").val(data[0].UmidadeMin),
+            $("#Reagentes_UmidadeMax").val(data[0].UmidadeMax),
+            $("#Reagentes_Pureza").val(data[0].Pureza),
+            $("#Reagentes_PrecaucoesAnaliticas").val(data[0].PrecaucoesAnaliticas),
+            $("#Reagentes_PrecaucoesSeguranca").val(data[0].PrecaucoesSeguranca),
+            $("#Reagentes_Parametros").val(data[0].Parametros)
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log("Request Failed: " + err);
+        });
+    }
+});
+
+***NO BACK
+
+    [Authorize]
+    public JsonResult GetDadosIntrumentoOriginal(int idInstrumentoOriginal)
+    {
+        var dadosInstrumento = _instrumentoGeralService.Get(i => i.idInstrumentoGeral == idInstrumentoOriginal)
+            .Select(i =>
+                    new {
+                        i.CodInterno,
+                        Reagente = i.Reagentes.Reagente,
+                        CAS = i.Reagentes.CAS,
+                        i.Ativo,
+                        i.Localizacao,
+                        i.Marca_Id,
+                        i.NumeroCatalogo,
+                        TipoClienteFabricante = i.Clientes != null ? i.Clientes.ClienteTipo_id : 0,
+                        i.Fabricante_Id,
+                        TipoClienteFornecedor = i.Clientes != null ? i.Clientes.ClienteTipo_id : 0,
+                        i.Fornecedor_Id,
+                        PesoMolecular = i.Reagentes.PesoMolecular,
+                        Densidade = i.Reagentes.Densidade,
+                        Concentracao = i.Reagentes.Concentracao,
+                        Unidade = i.Reagentes.Unidade_Id,
+                        TemperaturaMin = i.Reagentes.TemperaturaMin,
+                        TemperaturaMax = i.Reagentes.TemperaturaMax,
+                        UmidadeMin = i.Reagentes.UmidadeMin,
+                        UmidadeMax = i.Reagentes.UmidadeMax,
+                        Pureza = i.Reagentes.Pureza,
+                        PrecaucoesAnaliticas = i.Reagentes.PrecaucoesAnaliticas,
+                        PrecaucoesSeguranca = i.Reagentes.PrecaucoesSeguranca,
+                        Parametros = i.Reagentes.Parametros
+                    });
+        return Json(dadosInstrumento, JsonRequestBehavior.AllowGet);
+    }

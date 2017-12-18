@@ -1,0 +1,73 @@
+SELECT
+
+SELECT MAX(salario) FROM EMPREGADOS) WHERE DEPARTAMENTO = 5
+SELECT CODIGO,NOME,SALARIO, SECAO FROM EMPREGADOS_FILIAL WHERE DEPARTAMENTO = 2
+==================================================================================================================
+
+INSERT
+
+INSERT INTO nome_tabela (lista-de-campos) VALUES (lista_dados)
+--OU
+INSERT INTO nome_tabela  VALUES (lista_dados)
+
+INSERT INTO EMPREGADOS(CODIGO, NOME, SALARIO, SECAO) VALUES (1, "HELBERT CARVALHO", 1.500, 1)
+INSERT INTO EMPREGADOS VALUES (1,"HELBERT CARVALHO",1500,1) //Somente quando forem passados valores para todas as colunas da tabela
+INSERT INTO EMPREGADOS(CODIGO,NOME, SALARIO, SECAO)
+      SELECT CODIGO,NOME,SALARIO, SECAO
+      FROM EMPREGADOS_FILIAL
+      WHERE DEPARTAMENTO = 2
+==================================================================================================================
+
+UPDATE
+
+UPDATE nome_tabela SET CAMPO = "novo_valor" WHERE CONDIÇÃO
+
+UPDATE DEPARTAMENTO SET SALARIO = 1000 WHERE CODIGODEP = 1
+UPDATE EMPREGADOS SET SALARIO = salario * 1.1 WHERE SALARIO = (SELECT MIN(salario) FROM EMPREGADOS)
+UPDATE EMPREGADOS SET SALARIO = (SELECT MAX(salario) FROM EMPREGADOS) WHERE DEPARTAMENTO = 5
+==================================================================================================================
+
+DELETE
+
+DELETE FROM nome_tabela WHERE condição
+
+DELETE FROM EMPREGADOS WHERE CODIGO = 125
+==================================================================================================================
+
+SUBCONSULTAS
+Comparação [ANY|SOME|ALL] (instrução sql)
+Expressão [NOT] IN (instrução sql)
+Expressão [NOT] EXISTS (instrução sql)
+
+SELECT * FROM A WHERE Y > ANY (SELECT Y FROM B WHERE X>20)
+UPDATE A SET X = X * 10 WHERE Y > ANY (SELECT Y FROM B WHERE X < 40)
+Todos os registros foram selecionados porque o valor de y no resultado da sub-consulta assume 3, que é menor do que todos os valores de y da tabela A. Se utilizarmos o ANY com sinal de igualdade teremos o mesmo resultado da cláusula IN
+DELETE FROM A WHERE Y > ANY (SELECT Y FROM B WHERE X < 40)
+SELECT * FROM A WHERE Y = ANY (SELECT Y FROM B)
+
+O predicado ALL é utilizado para recuperar os registros da consulta principal que satisfaçam a comparação com todos os registros recuperados na sub-consulta. Observe os exemplos:
+SELECT * FROM A WHERE Y > ALL (SELECT Y FROM B)
+SELECT * FROM A WHERE Y != ALL (SELECT Y FROM B)
+
+O predicado IN é utilizado para recuperar apenas os registros na consulta principal que contém equivalência na sub-consulta. É o mesmo que =ANY.
+SELECT * FROM A WHERE Y IN(SELECT Y FROM B)
+
+SELECT * FROM EMPREGADO WHERE CODIGO IN 
+(SELECT CODEMPREGADO FROM VENDAS 
+GROUPY BY CODEMPREGADO
+HAVING MAX(VALORTOTAL) > 50000)
+
+De maneira contrária, NOT IN pode ser utilizado para recuperar apenas os registros na consulta principal para os quais não exista equivalência na sub-consulta.
+SELECT * FROM A WHERE Y NOT IN(SELECT Y FROM B)
+
+O predicado EXISTS determina se a sub-consulta retorna algum registro. Esta cláusula produz resultados semelhantes ao uso de IN.
+SELECT * FROM EMPREGADO WHERE EXISTS
+(SELECT * FROM PEDIDOS
+ WHERE EMPREGADO.CODIGO = PEDIDOS.CODEMPREGADO
+ GROUP BY PEDIDOS.CODEMPREGADO
+ HAVING MAX(PEDIDOS.VALOR_TOTAL) > 50000)
+
+O predicado NOT EXISTS também pode ser utilizado produzindo o efeito contrário:
+SELECT * FROM EMPREGADO WHERE NOT EXISTS
+(SELECT * FROM PEDIDOS
+WHERE EMPREGADO.CODIGO = PEDIDOS.EMPREGADO)

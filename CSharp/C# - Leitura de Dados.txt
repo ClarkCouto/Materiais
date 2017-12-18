@@ -1,0 +1,21 @@
+Leitura de Dados
+	Double x = Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+	String str = Console.ReadLine();
+	int i = int.Parse(Console.ReadLine());
+	char c = char.Parse(Console.ReadLine());
+
+Criar um vetor com os dados digitados separados por espaço
+	string[] vetor = Console.ReadLine().split(' ');
+
+
+Imprimir Double determinando casas decimais
+	Double numero = 10.35784;
+    Console.WriteLine(numero.ToString("F2")); /*Imprime conforme a localização do computador (Brasil imprime ,)*/
+    Console.WriteLine(numero.ToString("F4"), CultureInfo.InvariantCulture); /* Imprime sempre usando . ao invés de , */
+
+Ler Double com . e ,
+	Double x;
+    x = Double.Parse(Console.ReadLine()); /*Ler um double esperando que seja digitado conforme a localização (Brasil separador é ,)*/
+    Console.WriteLine(x.ToString("F2"));
+    x = Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture); /* Ler um double sempre esperando o separador . */
+    Console.WriteLine(x.ToString("F2"));

@@ -1,0 +1,12 @@
+MUDAR A POSIÇÃO DE UM OBJETO AO PASSAR O MOUSE POR CIMA
+
+Scale: aumenta ou diminui o tamanho do objeto 1 == 100%
+Translate: altera a posição onde o objeto será mostrado
+Rotate: muda a rotação do objeto
+ 
+#pic:hover{
+   transform: scale(2) translate(50px, 50px) rotate(10deg);
+}  
+
+ANIMAÇÃO
+.animate-get-angry

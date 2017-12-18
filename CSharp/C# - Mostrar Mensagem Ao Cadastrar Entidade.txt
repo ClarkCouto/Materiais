@@ -1,0 +1,17 @@
+Controller
+
+            //if (TempData["SuccessMessage"] != null)
+            //{
+            //    ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            //}
+
+View
+
+
+            @*BOTAO SALVAR, MSG SUCESS, MSG ERROR*@
+            <div class="form-group">
+                <div class="col-md-8 col-md-offset-5 row-fluid">
+                    <input id="btnSalvar" type="submit" value="Salvar" class="btn btn-qualistatus" />
+                    <span id="alert-suc" class="text-success">@ViewBag.SuccessMessage</span>
+                </div>
+            </div>

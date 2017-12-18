@@ -1,0 +1,32 @@
+				.append($(document.createElement('div'))
+                                     .addClass('col-md-2 col-sm-4 col-xs-10')
+                                     .attr('style', 'margin-top:5px')
+                                     .append($(document.createElement('input'))
+                                                     .attr('id', 'clientesInativos')
+                                                     .attr('type', 'dropdown')
+                                                     .attr("selectedindexchange", "selectedIndexChange(this)")
+                                                     .attr("value",false)
+                                     
+                                            )
+			.after($(document.createElement('div'))
+			.append($(document.createElement('div'))
+                              .addClass('col-md-2 col-sm-4 col-xs-10')
+                              .attr('style', 'margin-top:5px')
+                              //<select>
+                              .append($(document.createElement('select'))
+                                      .attr('id', 'contratosPesquisar')
+                                      .addClass('form-control chosen-select')
+                                      .html('<option>--Selecione--</option>')
+                                      .html('<option>Última Semana</option>')
+                                      .html('<option>Último Mês</option>')
+                                      .html('<option>No Mês...</option>')
+                                      .html('<option>No Período...</option>')
+                                     )
+                              //</select>
+var list = $("#contratosPesquisar");
+$.each(items, function(index, item) {
+  list.append(new Option(item.text, item.value));
+});
+
+$(document).ready(function (){
+	$('#contratosPesquisar').append("<

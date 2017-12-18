@@ -1,0 +1,13 @@
+Authorize 
+http://azure.microsoft.com/en-us/documentation/ articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/
+
+
+
+As implied by the name, the Roles parameter can take more than one role. You can pass in a comma-delimited list:
+[Authorize(Roles="Administrator,SuperAdmin")] public class TopSecretController:Controller
+
+You can also authorize by a list of users:
+[Authorize(Users="Jon,Phil,Scott,Brad,David")] public class TopSecretController:Controller
+
+And you can combine them, as well:
+[Authorize(Roles="UsersNamedScott", Users="Jon,Phil,Brad,David")] public class TopSecretController:Controller

@@ -1,0 +1,35 @@
+HTML5 added the following attributes for <input>:
+http://www.w3schools.com/html/html_form_attributes.asp
+
+ <input name=”CEP” id=”CEP” required pattern=”\d{5}-?\d{3}” />
+
+autocomplete
+autofocus
+form
+formaction
+formenctype
+formmethod
+formnovalidate
+formtarget
+height and width
+list
+min and max
+multiple
+pattern (regexp)
+placeholder
+required
+step
+
+and the following attributes for <form>:
+
+autocomplete
+novalidate
+
+Constraint Validation HTML Input Attributes
+Attribute	Description
+disabled	Specifies that the input element should be disabled
+max		Specifies the maximum value of an input element
+min		Specifies the minimum value of an input element
+pattern		Specifies the value pattern of an input element
+required	Specifies that the input field requires an element
+type 		Specifies the type of an input element

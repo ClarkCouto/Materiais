@@ -1,0 +1,134 @@
+***HTML para criar uma checkbox com uma função OnClick aninhada
+<div class="form-group">
+   <label class="control-label col-md-5">Novo Lote:</label>
+   <div class="col-md-6">
+       <div class="checkbox">
+           @*<input id="novoLote" type="checkbox" onclick="checkBoxChange(this)"/>*@
+           @Html.EditorFor(model => model.Lote, new { htmlAttributes = new { @id = "novoLote", @type = "checkbox", @onclick = "checkBoxChange(this)" } })
+       </div>
+   </div>
+</div>
+
+
+*** BUSCAR TODAS AS CHECKBOXES MARCADAS DENTRO DE UMA TABELA
+    var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $('#tabelaVariaveis'));
+    var $row = $(this).parent().index();
+    var id = $chkbox_checked[$row].id;
+
+***BUSCAR TODOS OS CHECKBOXES MARCADOS DA TELA USANDO XANDELIER
+    var selectedRows = getElement("+type=checkbox&&+!checked");
+    
+*** QUANDO ALTERAR O STATUS DA CHECKBOX ESCONDER OU MOSTRAR UM ELEMENTO NA TELA
+function checkBoxChange(check) {
+    var marked = check.checked;
+    $('#divInputEnsaio').toggle(marked);
+}
+
+
+
+*** EFETUAR UMA FUNÇÃO EM CADA CHECKBOX DA TELA
+function CheckBox(status) {
+    var chkboxes = $('tbody input[type="checkbox"]', $('#tabelaVariaveis'));
+    $.each(chkboxes, function (index) {
+        if (status == "true") {
+            chkboxes.removeAttr("disabled");
+        }
+        else {
+            chkboxes.attr("disabled", "disabled");
+        }
+    });
+}
+
+
+
+***SCRIPT BUSCAR SOMENTE A CHECKBOX QUE DISPAROU O EVENTO E EXECUTAR UMA CONSULTA JSON USANDO O ID DELA
+function chkBuscarDoLote(chk) {
+    var lote = $('#Lote_id').val();
+    if (lote != "") {
+        var idVar = chk.id;
+        $.getJSON(window.rootUrl + 'Ensaio/GetValorVariavelLote', {
+            idVariavel: idVar,
+            loteEnsaio: lote
+        })
+            .done(function (Data) {
+                $.each(Data, function (i, item) {
+                    listaModalVariaveis[Number(item.Variavel_id)].getElement(".Instrumento_id")[0].value = item.Instrumento_id;
+                    listaModalVariaveis[Number(item.Variavel_id)].getElement(".Variavel_id")[0].value = item.Variavel_id;
+                    listaModalVariaveis[Number(item.Variavel_id)].getElement(".Valor")[0].value = item.Valor;
+                    listaModalVariaveis[Number(item.Variavel_id)].getElement(".QuantidadeEstoqueUtilizada")[0].value = item.QuantidadeEstoqueUtilizada;
+                    listaModalVariaveis[Number(item.Variavel_id)].getElement(".Observacoes_Analista")[0].value = item.Observacoes_Analista;
+                    listaModalVariaveis[Number(item.Variavel_id)].getElement(".Observacoes_Revisor")[0].value = item.Observacoes_Revisor;
+
+                    tableVariaveis.cell(getElement("#valorVariavel_" + item.Variavel_id)).data(listaModalVariaveis[Number(item.Variavel_id)].getElement(".Valor")[0].value).draw();
+                    chk.disabled = true;
+                });
+            })
+            .fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+    }
+}
+
+
+
+***SCRIPT BUSCAR TODAS AS CHECKBOXES MARCADAS E EXECUTAR UMA CONSULTA JSON
+var selectedRows = [];
+$('#tabelaVariaveis tbody').on('click', 'input[type="checkbox"]', function (e) {
+    var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $('#tabelaVariaveis'));
+    if ($chkbox_checked.length > 0) {
+        var lote = $('#Lote_id').val();
+
+        if (lote != "") {
+            $.each($chkbox_checked, function (index) {
+                var idVar = $chkbox_checked[index].id;
+                var atual = $.inArray(idVar, selectedRows);
+                if (atual === -1) {
+                    selectedRows.push(idVar);
+                    $.getJSON(window.rootUrl + 'Ensaio/GetValorVariavelLote', {
+                        idVariavel: idVar,
+                        loteEnsaio: lote
+                    })
+                        .done(function (Data) {
+                            $.each(Data, function (i, item) {
+                                listaModalVariaveis[Number(item.Variavel_id)].getElement(".Instrumento_id")[0].value = item.Instrumento_id;
+                                listaModalVariaveis[Number(item.Variavel_id)].getElement(".Variavel_id")[0].value = item.Variavel_id;
+                                listaModalVariaveis[Number(item.Variavel_id)].getElement(".Valor")[0].value = item.Valor;
+                                listaModalVariaveis[Number(item.Variavel_id)].getElement(".QuantidadeEstoqueUtilizada")[0].value = item.QuantidadeEstoqueUtilizada;
+                                listaModalVariaveis[Number(item.Variavel_id)].getElement(".Observacoes_Analista")[0].value = item.Observacoes_Analista;
+                                listaModalVariaveis[Number(item.Variavel_id)].getElement(".Observacoes_Revisor")[0].value = item.Observacoes_Revisor;
+
+                                tableVariaveis.cell(getElement("#valorVariavel_" + item.Variavel_id)).data(listaModalVariaveis[Number(item.Variavel_id)].getElement(".Valor")[0].value).draw();
+                            });
+                        })
+                        .fail(function (jqxhr, textStatus, error) {
+                            var err = textStatus + ", " + error;
+                            console.log("Request Failed: " + err);
+                        });
+                }
+            })
+        }
+    }
+})
+
+
+***CRIAR CHECKBOX USANDO CHANDELIER
+
+function criarCheckNovoLote() {
+    $('.checkbox').after(
+        $(document.createElement('div'))
+            .append($(document.createElement('div'))
+                .addClass('col-md-4 col-sm-4 col-xs-10')
+                .append(createElement('input').config({
+                    id: "novoLote",
+                    type: "checkbox",
+                    Sdisplay: "block",
+                    Fclick: function () { checkBoxChange(this); }
+                })
+                //.append($(document.createElement('label'))
+                //    .addClass('control-label ')
+                //    .text('Novo Lote')
+                //)
+            )
+    )
+}

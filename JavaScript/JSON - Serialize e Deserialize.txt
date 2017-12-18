@@ -1,0 +1,53 @@
+*** SERIALIZE
+        protected string SerializeInstrumentos()
+        {
+            var instrumentos = _instrumentoGeralService.GetAll().Select(i =>
+                            new
+                            {
+                                i.idInstrumentoGeral,
+                                i.CodInterno,
+                                Grupo = (i.EquipamentoBit == true ? "Equipamentos" : (
+                                            i.ReagenteBit == true ? "Reagentes" : (
+                                            i.SolucaoBit == true ? "Solucoes" : (
+                                            i.VidrariaBit == true ? "Vidrarias" :
+                                            "")))
+                                ),
+                                idGrupo = (i.EquipamentoBit == true ? 0 : (
+                                              i.ReagenteBit == true ? 1 : (
+                                              i.SolucaoBit == true ? 2 : (
+                                              i.VidrariaBit == true ? 3 :
+                                              -1)))
+                                )
+                            }).ToList();
+            return JsonConvert.SerializeObject(instrumentos);
+        }
+
+
+        protected List<Variaveis> SerializeVariaveis(int? idMetodo)
+        {
+            List<Metodos_Variaveis> metodos_variaveis = _metodoService.Get(m => m.idMetodo == idMetodo).FirstOrDefault().Metodos_Variaveis.ToList();
+            List<Variaveis> variaveis = new List<Variaveis>();
+            foreach (var v in metodos_variaveis)
+            {
+                Variaveis variavel = _variavelService.FindById(v.Variavel_Id);
+                variaveis.Add(variavel);
+            }
+            return variaveis;
+        }
+
+*** DESERIALIZE
+        --- Aberto
+        protected List<int> DeserializeVariaveis(string listVariavel)
+        {
+            List<Variaveis> variaveis = JsonConvert.DeserializeObject<List<Variaveis>>(listVariavel).ToList();
+            List<int> listVariaveisId = new List<int>();
+            foreach (var v in variaveis)
+                listVariaveisId.Add(v.idVariavel);
+            return listVariaveisId;
+        }
+
+        --- Resumido
+        protected List<int> Deserialize(string listVariavel)
+        {
+            return listVariavel.Equals("") ? null : JsonConvert.DeserializeObject<List<Variaveis>>(listVariavel).Select(x => x.idVariavel).ToList();
+        }

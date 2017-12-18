@@ -1,0 +1,12 @@
+[HttpPost] 
+public ActionResult Edit(int id, FormCollection collection) 
+{   
+	var album = storeDB.Albums.Find(id);
+   	ModelState.AddModelError("Title", "What a terrible name!");
+   	return View(album); 
+}
+
+
+In the view, you can display the error message (if any) with the following code:
+
+@Html.ValidationMessage("Title")

@@ -1,0 +1,70 @@
+
+//Todas as drops que serão atualizadas no change da drop de Grandeza
+var drops = [$("#UnidadeValorNominal_Id"), $("#UnidadeExatidao_Id"), $("#UnidadeLinearidade_Id"), $("#UnidadeMedidasResolucaoIncerteza_Id"), $("#UnidadeTolerancia_Id")];
+var options = [];
+
+//Json para buscar as unidades que fazem parte da Grandeza selecioanda e adicionar em um array
+$('#Grandeza_Id').change(function () {
+    idGrandeza = $(this).val();
+    options = [];
+    if (idGrandeza.length > 0) {
+        $.getJSON(window.rootUrl + 'Unidade/GetUnidadesByGrandeza', {
+            idGrandeza: idGrandeza,
+        })
+        .done(function (data) {
+            $.each(data, function (i, item) {
+                options.push({
+                    idUnidade: data[i].idUnidade,
+                    Unidade: data[i].Unidade
+                });
+            })
+        })
+        .done(function () {
+            //depois que tiver buscado as unidades adiciona os dados nas drops
+            preencherDrops()
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log("Request Failed: " + err);
+        });
+    }
+});
+
+
+function preencherDrops() {
+    //para cada uma das drops de unidades
+    $.each(drops, function (i) {
+        //limpa o conteúdo anterior
+        drops[i].empty();
+        //adiciona o selecione
+        drops[i].append($('<option />').val("").html("--Selecione--"));
+        //para cada unidade da grandeza selecionada
+        $.each(options, function (j, item) {
+            var option = $('<option />').val(item.idUnidade).html(item.Unidade);
+            //adiciona o option nas drop
+            drops[i].append(option);
+        });
+    });
+}
+
+$('#UnidadeValorNominal_Id').change(function () {
+    dropValorNominalChange();
+});
+
+$('#UnidadeMedidasResolucaoIncerteza_Id').change(function () {
+    dropUnidadesChange();
+});
+
+function dropValorNominalChange() {
+    var selected = $('#UnidadeValorNominal_Id :selected').val();
+    $("#UnidadeExatidao_Id").val(selected);
+    $("#UnidadeLinearidade_Id").val(selected);
+    $("#UnidadeMedidasResolucaoIncerteza_Id").val(selected);
+    $("#UnidadeTolerancia_Id").val(selected);
+    $("#UnidadeValorNominal_Id").val(selected);
+    $(".unidades").val($('#UnidadeMedidasResolucaoIncerteza_Id :selected').text());
+}
+
+function dropUnidadesChange() {
+    $(".unidades").val($('#UnidadeMedidasResolucaoIncerteza_Id :selected').text());
+}

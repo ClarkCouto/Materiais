@@ -1,0 +1,65 @@
+TIMING EVENTS
+
+setTimeout(function, milliseconds)
+Executes a function, after waiting a specified number of milliseconds.
+
+<button onclick="myVar = setTimeout(myFunction, 3000)">Try it</button>
+<script>
+function myFunction() {
+    alert("Hello");
+}
+</script>
+
+Para cancelar a execução usar (antes que o tempo passado por parâmetro seja alcançado)
+clearTimeout(); - passando a variável criada no setTimeout como parâmetro
+
+<button onclick="clearTimeout(myVar)">Stop it</button>
+
+
+setInterval(function, milliseconds)
+Same as setTimeout(), but repeats the execution of the function continuously.
+
+<p id="demo"></p>
+<script>
+var myVar = setInterval(myTimer, 1000);
+function myTimer() {
+    var d = new Date();
+    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+}
+</script>
+
+Para parar a execução usar
+clearInterval(); - passando a variável criada no setInterval como parâmetro
+clearInterval(myVar);
+
+==================================================================================================================
+RELÓGIO QUE SE ATUALIZA AUTOMATICAMENTE
+
+<!DOCTYPE html>
+<html>
+<body>
+<p>A script on this page starts this clock:</p>
+<p id="demo"></p>
+<button onclick="clearInterval(myVar)">Stop time</button>
+<script>
+var myVar = setInterval(myTimer ,1000);
+function myTimer() {
+    var d = new Date();
+    document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+}
+</script>
+</body>
+</html>
+==================================================================================================================
+
+A loja fechou e não informou o motivo e nem para onde se mudou, utilizei somente as 2 primeiras sessões e não pude utilizar o resto. Fiquei muito insatisfeito.
+
+Av. Benjamin Constant,419, , São Geraldo - Porto Alegre - RS (mapa)
+http://www.felippehart.net/
+51 3273-6433 /051 32070-7528
+
+
+Código: 1315931189282
+GF Hart Jr LTDA
+
+

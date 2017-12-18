@@ -1,0 +1,285 @@
+ejohn
+
+JavaScript FunctionDefinitions
+
+
+***VALIDAR UM CAMPO USANDO JS
+<form name="myForm" action="demo_form.asp" onsubmit="return validateForm()" method="post">
+Name: <input type="text" name="fname">
+<input type="submit" value="Submit">
+</form>
+
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["fname"].value; //myForm = nome do formulário; fname = nome do campo
+    if (x == null || x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+}
+</script>
+
+============================================================================================================
+DROPDOWNLISTS
+
+//DESABILITAR UM ELEMENTO DA PÁGINA
+function disable() {
+    document.getElementById("IdDoElemento").disabled=true;
+}
+//VERIFICAR TAMANHO DO DROPDOWN
+function getSize(){
+    document.getElementById("IdMyDropDown").length;
+}
+//MUDAR O TAMANHO DO DROPDOWN
+function changeSize() {
+    document.getElementById("mySelect").size = 4;
+}
+//HABILITAR MULTISELEÇÃO 
+function selectMultiple() {
+    document.getElementById("mySelect").multiple = true;
+}
+//MOSTRAR A OPÇÃO SELECIONADA NO DROPDOWN
+function getOption() {
+    var obj = document.getElementById("mySelect");
+    document.getElementById("demo").innerHTML = 
+    obj.options[obj.selectedIndex].text;
+}
+//MOSTRAR TODAS AS OPÇÕES DISPONÍVEIS NO DROPDOWN
+function getOptions() {
+    var x = document.getElementById("mySelect");
+    var txt = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+        txt = txt + " " + x.options[i].text;
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+//MOSTRAR A POSIÇÃO DO ITEM SELECIONADO
+function getIndex() {
+    document.getElementById("demo").innerHTML =
+    document.getElementById("mySelect").selectedIndex;
+}
+//ALTERAR O TEXTO DO ITEM SELECIONADO
+function changeText() {
+    x = document.getElementById("mySelect");
+    x.options[x.selectedIndex].text = "Melon";
+}
+//REMOVER ITEM DO DROPDOWN
+function removeOption() {
+    var x = document.getElementById("mySelect");
+    x.remove(x.selectedIndex);
+}
+==================================================================================================================
+MOSTRAR COORDENADAS DO MOUSE
+function coordinates(event) {
+    document.getElementById("demo").innerHTML =
+    "X = " + event.screenX + "<br>Y = " + event.screenY;
+}
+==================================================================================================================
+ABRIR UMA NOVA TELA
+function openWin() {
+    window.open("http://www.w3schools.com","_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=400, height=400");
+}
+==================================================================================================================
+SELECIONAR UM ELEMENTO 
+document.getElementById("demo").innerHTML = //Seleciona o elemento que corresponda aquele ID
+==================================================================================================================
+DATAS
+document.getElementById("demo").innerHTML = new Date().toDateString(); //Retorna Wed Dec 23 2015 
+
+Method		Description
+getDate()	Get the day as a number (1-31)
+getDay()	Get the weekday as a number (0-6)
+getFullYear()	Get the four digit year (yyyy)
+==================================================================================================================
+NÚMEROS ALEATÓRIOS
+Math.floor(Math.random() * 11);   // Retorna um número aleatório entre 0 e 10
+==================================================================================================================
+NÚMEROS FLOAT
+var z = 0.1 + 0.2; // the result in z will not be 0.3
+var z = (x * 10 + y * 10) / 10;       // z will be 0.3
+==================================================================================================================
+ARRAY
+//Arrays podem alocar qualquer coisa
+array.push("str"); //Adiciona str na última posição do array
+array.pop(); //Remove o último item do array
+array.shift(); //Remove o primeiro elemento e reordena todos os outros nas posições corretas
+array.unshift("str"); //Adiciona str na primeira posição do array e reordena os outros nas posições corretas
+
+//Verifica se o objeto é um array e retorna true or false
+Array.isArray(fruits); 
+
+//.toString() retorna todos os elementos separados por vírgula
+//.join(" * ") retorna todos os elementos separados pelo que está dentro dos parênteses
+document.getElementById("demo").innerHTML = fruits.join(" * ");
+
+//Adiciona os itens do splice a partir da posição 2 
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 0, "Lemon", "Kiwi"); // 2 = posição 0 = quantos elementos devem ser removidos "lemon" = elementos que serão inseridos a partir da posição 
+
+//Remove o primeiro elemento de frutas
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(0, 1);        // Removes the first element of fruits  0 = posição 1 = quantidade de elementos
+
+//Ordena o array
+fruits.sort();
+
+//Inverte o array
+fruits.reverse();   
+
+//Ordena array de números 
+points.sort(function(a, b){return a>b}); //Do menor para o maior
+points.sort(function(a, b){return b>a}); //Do maior para o menor
+==================================================================================================================
+IF e CONDIÇÃO TERNÁRIA
+var voteable = (age < 18) ? "Too Young" : "Old Enough"; // Não se coloca o IF
+var result = (firstName == "John") ? "Hello " + firstName : "You're not John";
+==================================================================================================================
+REGULAR EXPRESSIONS
+var str = "Visit W3Schools";
+var n = str.search(/w3schools/i); // Procura W3Schools no texto sem case sensitive (retorna a posição onde foi encontrado)
+
+i	Perform case-insensitive matching
+g	Perform a global match (find all matches rather than stopping after the first match)
+m	Perform multiline matching
+[abc]	Find any of the characters between the brackets
+[0-9]	Find any of the digits between the brackets
+(x|y)	Find any of the alternatives separated with |
+\d	Find a digit
+\s	Find a whitespace character
+\b	Find a match at the beginning or at the end of a word
+\uxxxx	Find the Unicode character specified by the hexadecimal number xxxx
+n+	Matches any string that contains at least one n
+n*	Matches any string that contains zero or more occurrences of n
+n?	Matches any string that contains zero or one occurrences of n
+==================================================================================================================
+TEST
+// Percorre o texto e verifica se existe pelo menos um "e" e retorna true or false
+var patt = /e/;
+patt.test("The best things in life are free!");
+/e/.test("The best things in life are free!"); // Também funciona
+==================================================================================================================
+EXEC
+//Percorre o texto e verifica se existe pelo menos um "a" e retorna o elemento caso true ou false caso não exista
+/e/.exec("The best things in life are free!");
+==================================================================================================================
+TRY CATCH
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo").value;
+    try { 
+        if(x == "")  throw "empty";
+        if(isNaN(x)) throw "not a number";
+        x = Number(x);
+        if(x < 5)    throw "too low";
+        if(x > 10)   throw "too high";
+    }
+    catch(err) {
+        message.innerHTML = "Input is " + err;
+    }
+}
+
+==================================================================================================================
+OBJECTS
+//Como criar um objeto
+var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+
+//ou
+var person = new Object();
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+person.eyeColor = "blue";
+
+//ou
+function person(first, last, age, eye) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+var myFather = new person("John", "Doe", 50, "blue");
+var myMother = new person("Sally", "Rally", 48, "green");
+
+//Para CRIAR uma nova propriedade no objeto é só declarar e iniciar a nova propriedade
+person.sex = "Masculino";
+
+//Para ACESSAR as propriedades dos objetos 
+person.firstname ou person["firstname"] // Mesmo resultado
+
+//Para DELETAR
+delete person.sex; // Ou delete person["age"];
+
+//Podem ser colocadas funções dentro do objeto
+person.fullName = function() {return this.fisrtName + this.LastName;}
+
+//E que podem ser chamadas usando
+person.methodName();
+
+==================================================================================================================
+FOREACH
+//Igual nas outras linguagem, porém sem o each
+<script>
+var txt = "";
+var person = {fname:"John", lname:"Doe", age:25}; 
+var x;
+for (x in person) {
+    txt += person[x] + " ";
+}
+document.getElementById("demo").innerHTML = txt;
+
+var array = [0,1,2,3,4,5];
+for (x in array) {
+    txt += array[x] + " ";
+}
+document.getElementById("demo").innerHTML = txt;
+</script>
+
+==================================================================================================================
+FUNCTIONS
+(function () {
+    document.getElementById("demo").innerHTML = "Hello! I called myself";
+})(); //Função que se chama automaticamente sem precisar ser invocada
+
+
+//Closures
+var add = (function () {
+    var counter = 0;
+    return function () {return counter += 1;}
+})();
+
+add();
+add();
+add();
+
+// the counter is now 3
+
+==================================================================================================================
+BEST PRACTICES
+//Caso vá usar o .length em um laço for, definir uma variável fora do laço e usá-la para evitar chamar o .lenght a cada iteração
+l = arr.length;
+for (i = 0; i < l; i++) {
+
+//Caso vá acessar um elemento diversas vezes durante o código, criar uma variável e usar a variável torna o código mais rápido
+obj = document.getElementById("demo");
+obj.innerHTML = "Hello";
+
+//Procure diminuir a quantidade de variáveis
+document.getElementById("demo").innerHTML = firstName + " " + lastName
+//Ao invés de:
+var fullName = firstName + " " + lastName;
+document.getElementById("demo").innerHTML = fullName;
+
+//Sempre procurar colocar os scripts no final da página, pois acelera o carregamento
+
+//Evitar usar o new
+var x1 = {};            // new object
+var x2 = "";            // new primitive string
+var x3 = 0;             // new primitive number
+var x4 = false;         // new primitive boolean
+var x5 = [];            // new array	object
+var x6 = /()/           // new regexp object
+var x7 = function(){};  // new function object
+

@@ -1,0 +1,25 @@
+
+//Json Adicionar itens em um array
+$('#Grandeza_Id').change(function () {
+    idGrandeza = $(this).val();
+    if (idGrandeza.length > 0) {
+        $.getJSON(window.rootUrl + 'Unidade/GetUnidadesByGrandeza', {
+            idGrandeza: idGrandeza,
+        })
+        .done(function (data) {
+            $.each(data, function (i, item) {
+                options.push({
+                    idUnidade: data[i].idUnidade,
+                    Unidade: data[i].Unidade
+                });
+            })
+        })
+        .done(function () {
+            dropGrandezaChange();
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log("Request Failed: " + err);
+        });
+    }
+});

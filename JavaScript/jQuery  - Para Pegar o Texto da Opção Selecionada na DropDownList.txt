@@ -1,0 +1,3 @@
+***jQuery PARA PEGAR O TEXTO DA OPÇÃO SELECIONADA NA DROPDOWNLIST
+
+$('#UnidadeMedidasResolucaoIncerteza_Id :selected').text();

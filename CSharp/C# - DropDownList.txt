@@ -1,0 +1,59 @@
+***CRIAR UM DROPDOWN
+
+NO BACK
+ViewBag.NomeDaViewBag = new SelectList(listaDeOndeVemOsDados, "ValorID", "Texto", itemPreSelecionado);
+
+NA VIEW
+<div class="form-group">
+    <label class="control-label col-md-5">Unidade de Amostra:</label>
+    <div class="col-md-5">
+        @Html.DropDownList("NomeDaViewBag", null, "-- Selecione --", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+=================================================================================================================
+***CRIAR UMA DROPDOWN COM OBJETOS ABSTRATOS
+public ActionResult Edit(int id) {                                          
+	var album = storeDB.Albums.Single(a => a.AlbumId == id);
+   	ViewBag.Genres =       storeDB.Genres     
+				.OrderBy(g => g.Name)              
+				.AsEnumerable()              
+				.Select(g => new SelectListItem{
+								Text = g.Name,
+								Value = g.GenreId.ToString(),       
+								Selected = album.GenreId == g.GenreId              
+								}
+					);   
+	return View(album); 
+}
+
+==================================================================================================================
+--Para gerar a atualização da página automáticamente (Envio do formulário para o Back) colocar o ONCHANGE
+@Html.DropDownList("CategoriasDrop", null,"-- Selecione --", htmlAttributes: new { @class = "form-control", @id = "DropCategoria", @name = "categoria", onchange = @"form.submit();" })
+
+==================================================================================================================
+*** ENVIAR DADO DA TELA PARA O BACK USANDO JS
+Quando alterar o valor selecionado armazenar o valor selecionado na variável LoteSelecionado que está hidden na view, este dado será acessível no back
+
+---NA VIEW
+<input type="text" hidden="hidden" id="LoteSelecionado" name="LoteSelecionado" value="" />
+
+---NO JS
+$('#Lote_id').change(function () {
+    if ($(this).val() != "") {
+        CheckBox("true");
+        $("#LoteSelecionado").val($('#Lote_id :selected').text());
+    }
+    else {
+        CheckBox("false");
+        $("#LoteSelecionado").val("");
+    }
+})
+
+==================================================================================================================
+***BUSCAR O VALOR DO ID DA OPÇÃO SELECIONADA NO DROPDOWN
+var lote = $('#Lote_id').val();
+
+
+
+

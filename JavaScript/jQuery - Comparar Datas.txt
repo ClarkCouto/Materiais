@@ -1,0 +1,71 @@
+COMPARAR DUAS DATAS
+http://stackoverflow.com/questions/18913579/compare-two-date-formats-in-javascript-jquery
+
+if(new Date(fit_start_time) <= new Date(fit_end_time))
+{//compare end <=, not >=
+    //your code here
+}
+
+var dataInicio = $('.datepickerInicio').datepicker('getDate');
+var dataFinal = $('.datepickerFinal').datepicker('getDate');
+if (new Date($('.datepickerInicio').val()) > new Date($('.datepickerFinal').val())) {
+    dataFinal = $('.datepickerFinal');
+    dataFinal.datepicker('setDate', dataInicio);
+}
+===========================================================================================
+GARANTIR QUE A DATA FINAL TEM DE SER MAIOR OU IGUAL A DATA INICIAL
+function setStartDate() {
+    var dataInicio = $('.datepickerInicio').datepicker('getDate');
+    var dataFinal = $('.datepickerFinal');
+    if (dataInicio == null || dataInicio == 'Invalid Date') {
+        dataFinal.datepicker('setDate', '');
+        dataFinal.attr("disabled", "disabled");
+    }
+    else {
+        dataFinal.removeAttr("disabled");
+        dataFinal.datepicker('setStartDate', dataInicio);
+        dataFinal = $('.datepickerFinal').datepicker('getDate');
+        if (dataFinal == null || dataFinal == 'Invalid Date') {
+            dataFinal = $('.datepickerFinal');
+            dataFinal.datepicker('setDate', dataInicio);
+        }
+    }
+};
+
+===========================================================================================
+<script type="text/javascript">
+        $(".datepickerVigencia").change(function () {
+            var dataInicio = $('.datepickerVigencia').datepicker('getDate');
+            var dataFinal = $('.datepickerRevogacao').datepicker('getDate');
+            var dataRevogacao = $('.datepickerRevogacao');
+            if (dataInicio == null || dataInicio == 'Invalid Date') {
+                dataRevogacao.datepicker('setDate', '');
+                dataRevogacao.attr("disabled", "disabled");
+            } else if (dataInicio > dataFinal) {
+                dataRevogacao.datepicker('setDate', '');
+            }
+            else {
+                dataRevogacao.removeAttr("disabled");
+                dataRevogacao.datepicker('setStartDate', dataInicio);
+            }
+        });
+
+        $(function () { // will trigger when the document is ready
+            $('.datepickerVigencia').datepicker({
+                setDate: '',
+                format: 'dd/mm/yyyy'
+            }); //Initialize datapicker Vigencia
+            $('.datepickerRevogacao').datepicker({
+                format: 'dd/mm/yyyy'
+            }); //Initialize datapicker Revisao
+            $('.datepickerRevogacao').datepicker('setStartDate', $('.datepickerVigencia').datepicker('getDate'));
+        });
+
+        //Data inicial nao deve ser menor que data revogaçao do piq a ser revisado
+        $('.datepickerVigencia').datepicker('setStartDate', $('.datepickerVigencia').datepicker('getDate'));
+        //Limpar campo data Inicio e Revogação para novo PIQ(revisado)
+        document.getElementById("DataInicioVigencia").removeAttribute('value');
+        document.getElementById("DataRevogacao").removeAttribute('value');
+        var tomorrow = new Date($('.datepickerVigencia').datepicker('getDate'));
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        $('.datepickerVigencia').datepicker('setStartDate', tomorrow);

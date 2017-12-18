@@ -1,0 +1,24 @@
+<html>
+  <body>
+
+  <h1 id="id1">My Heading 1</h1>
+
+  <button type="button" onclick="changeColor()"> Click Me! </button>
+
+  <script>
+    var x = "false";
+    function changeColor(){
+      var y = document.getElementById("id1");
+      if(x == "false"){
+        y.style.color = "red";
+        x = "true";
+      }
+      else{
+        y.style.color = "black";
+        x = "false";
+      }
+    }
+  </script>
+
+  </body>
+</html>

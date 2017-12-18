@@ -1,0 +1,6 @@
+http://www.csharp-examples.net/delete-all-files/
+
+https://msdn.microsoft.com/en-us/library/cc148994.aspx
+
+http://www.telerik.com/help/aspnet-mvc/telerik-ui-components-window-client-api-and-events.html
+

@@ -1,0 +1,2 @@
+***LIMPAR TODOS OS TIPOS DE CAMPO (Input, Drop e TextArea)
+var campos = $("input,select,textarea").not("input:hidden").not(":input[type='submit']").not(":input[type='button']").val("").trigger('chosen:updated')

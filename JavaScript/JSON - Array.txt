@@ -1,0 +1,38 @@
+Getting JSON 
+
+public ActionResult ArtistSearch(string q) {  
+	var artists = GetArtists(q);   
+	return Json(artists, JsonRequestBehavior.AllowGet); 
+}
+
+Now you’ll need to change the script to expect JSON instead of HTML. 
+jQuery provides a method named getJSON that you can use to retrieve the data:
+
+$("#artistSearch").submit(function (event) {   
+	event.preventDefault();
+	var form = $(this);   
+	$.getJSON(form.attr("action"), form.serialize(), function (data)       // now what?   
+	}); 
+});
+
+
+
+http://www.w3schools.com/json/default.asp
+
+
+//Criar um array em JSON
+var text = '{ "employees" : [' +
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+//Converter o JSON para JavaScript
+var obj = JSON.parse(text);
+
+//Usar o JSON trasnformado em JavaScript na página
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script>

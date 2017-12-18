@@ -1,0 +1,12 @@
+﻿--Tabela Ensaio = Alteração campo Nome -> Ensaio
+
+--Incluir Colunas EmAnalise e HabilitadasParaRevisao na tabela Amostras
+BEGIN TRAN
+	BEGIN TRY
+		EXEC sp_rename 'Ensaios.Ensaios.[Nome]', 'Ensaio', 'COLUMN';
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		THROW
+		ROLLBACK TRAN
+	END CATCH

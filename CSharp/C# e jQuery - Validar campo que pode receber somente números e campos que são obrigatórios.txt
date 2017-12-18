@@ -1,0 +1,82 @@
+//Validar campo somente números
+	***NA VIEW
+    @Html.EditorFor(model => model.QuantidadeUtilizada, new { htmlAttributes = new { @class = "form-control validaReagentes", @onkeypress = "return isNumberKey(event)" } })
+
+	***NO JAVASCRIPT
+	function isNumberKey(evt)
+	{
+	    var charCode = (evt.which) ? evt.which : event.keyCode;
+
+	    if (charCode > 31 && (charCode < 39 || charCode > 57))
+	        return false;
+	    return true;
+	}
+
+//Validar um campo obrigatório e somente números
+	*** NA VIEW
+	//Quando for validar somente se é obrigatório:
+	@Html.ValidationMessageFor(model => model.Reagentes.Densidade, "", new { @class = "text-danger spanErroOpcionais" })
+	//Quando for validar se é obrigatório e se é numérico
+	<span class="text-danger spanErroObrigatorios" id="pesoMolecularSpan"></span>
+
+	*** NO JAVASCRIPT
+	//Dentro do document.ready
+    $(".validaReagente").focusout(testaObrigatorios)
+
+    //No corpo do JS
+	function testaObrigatorios() {
+	    var item = $(this)
+	    var span = $(item.nextAll("span")[0])
+	    var id = item.attr("id")
+	    valor = item.val() != "-- Selecione --" ? (item.val() ? item.val() : "") : 0;
+	    var name;
+	    switch (id) {
+	        case "PrefixoCodInterno": name = "Prefixo Código Interno"; break;
+	        case "Marca_Id": name = "Marca"; break;
+	        case "Reagentes_Reagente": name = "Reagente"; break;
+	        case "Reagentes_PesoMolecular": name = "Peso Molecular"; break;
+	    }
+	    if (!valor) {
+	        span.text(name + " é obrigatório.")
+	        return "erro";
+	    }
+	    if (name === "Peso Molecular") {
+	        if (valor && (/[^\d,\.]/.test(valor) || (/[\.,]/.exec(valor) != null && /[\.,]/.exec(valor).length > 1))) {
+	            span.text("Somente números.")
+	            return "erro";
+	        }
+	    }
+	    span.text("")
+	}
+
+//Quando preencher um campo e tiver que obrigar o preenchimento de outro
+	***NA VIEW
+
+	*** NO JAVASCRIPT
+	//Dentro do document.ready
+    $(".validaOpcionais").focusout(testaOpcionais)
+
+    //No corpo do JS
+	function testaOpcionais() {
+	    var item = $(this)
+	    var span = $(item.nextAll("span")[0])
+	    var id = item.attr("id")
+	    valor = item.val();
+	    if (valor) {
+	    	//Verifica se é numérico
+	        if (valor && (/[^\d,\.]/.test(valor) || (/[\.,]/.exec(valor) != null && /[\.,]/.exec(valor).length > 1))) {
+	            span.text("Somente números.")
+	            return "erro";
+	        }
+	        //Caso seja o campo desejado coloca a mensagem de campo obrigatório no outro campo
+	        else if(id === "Reagentes_Concentracao") {
+	            span.text("")
+	            var drop = $("#Unidade_Id");
+	            span = $(drop.nextAll("span")[0])
+	            span.text("Unidade é obrigatória.")
+	            return "erro";
+	        }
+	    }
+	    span.text("")
+	}
+

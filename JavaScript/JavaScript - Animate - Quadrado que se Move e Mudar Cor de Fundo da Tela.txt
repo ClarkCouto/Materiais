@@ -1,0 +1,88 @@
+QUADRADO QUE SE MOVE NA DIAGONAL NA TELA
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: red;
+}
+</style>
+<body>
+
+<p>
+<button onclick="myMove()">Click Me</button>
+</p> 
+
+<div id ="container">
+<div id ="animate"></div>
+</div>
+
+<script>
+function myMove() {
+  var elem = document.getElementById("animate");   
+  var pos = 0;
+  var voltar = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if(pos == 0){
+      voltar = 0;
+    }
+    if(pos == 350) {
+      voltar = 1;
+    }
+    if(voltar == 0){ 
+      pos++; 
+      elem.style.top = pos + 'px'; 
+      elem.style.left = pos + 'px'; 
+    }
+    if(voltar == 1){
+      pos--; 
+      elem.style.top = pos + 'px'; 
+      elem.style.left = pos + 'px'; 
+   }
+ }
+}
+</script>
+
+</body>
+</html>
+==================================================================================================================
+MUDA A COR DO FUNDO DA TELA
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function bgChange(bg) {
+    document.body.style.background = bg;
+}
+</script>
+</head>
+<body>
+<h2>Change background color</h2>
+<p>Mouse over the squares!</p>
+<table style="width:300px;height:100px">
+  <tr>
+    <td onmouseover="bgChange(this.style.backgroundColor)" 
+        onmouseout="bgChange('transparent')"
+        style="background-color:Khaki">
+    </td>
+    <td onmouseover="bgChange(this.style.backgroundColor)" 
+        onmouseout="bgChange('transparent')"
+        style="background-color:PaleGreen">
+    </td>
+    <td onmouseover="bgChange(this.style.backgroundColor)" 
+        onmouseout="bgChange('transparent')"
+        style="background-color:Silver">
+    </td>
+  </tr>
+</table>
+</body>
+</html>

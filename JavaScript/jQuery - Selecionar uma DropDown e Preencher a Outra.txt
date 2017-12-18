@@ -1,0 +1,74 @@
+***AJAX (no controller)
+
+[Authorize]
+public JsonResult GetClientesByTipo(int idTipoCliente)
+{
+    try{
+       var clientes = _clienteService.Get(c => c.ClienteTipo_id == idTipoCliente).Select(c => new { c.idCliente, c.Cliente }).ToList();
+        return Json(clientes, JsonRequestBehavior.AllowGet);
+    }
+    catch (Exception){
+        return Json("error", JsonRequestBehavior.AllowGet);
+    }
+}
+
+***JAVASCRIPT (com uma só drop)
+
+$('#TipoClienteFabricante').change(function () {
+    //var id = $('#TipoClienteFabricante :selected').val();
+    var idTipoCliente = $(this).val();
+    var dropFabricante = $("#Fabricante_Id");
+    dropFabricante.empty();
+    dropFabricante.append($('<option />').val("").html("-- Selecione --"));
+    if (idTipoCliente.length > 0) {
+        $.getJSON(window.rootUrl + 'Cliente/GetClientesByTipo', {
+            idTipoCliente: idTipoCliente,
+        })
+        .done(function (data) {
+            $.each(data, function (i, item) {
+                var option = $('<option />').val(item.idCliente).html(item.Cliente);
+                dropFabricante.append(option);
+            });
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log("Request Failed: " + err);
+        });
+    }
+});
+
+***JAVASCRIPT (Com mais de uma drop usando o mesmo codigo)
+
+
+$('#TipoClienteFabricante').change(function () {
+    buscarClientes(this.name, $(this).val());
+})
+
+$('#TipoClienteFornecedor').change(function () {
+    buscarClientes(this.name, $(this).val());
+})
+
+function buscarClientes(dropNome, idSelecionado) {
+    var drop;
+    if (dropNome == "TipoClienteFabricante")
+        drop = $("#Fabricante_Id");
+    else if (dropNome == "TipoClienteFornecedor")
+        drop = $("#Fornecedor_Id");
+    drop.empty();
+    drop.append($('<option />').val("").html("-- Selecione --"));
+    if (idSelecionado.length > 0) {
+        $.getJSON(window.rootUrl + 'Cliente/GetClientesByTipo', {
+            idTipoCliente: idSelecionado,
+        })
+        .done(function (data) {
+            $.each(data, function (i, item) {
+                var option = $('<option />').val(item.idCliente).html(item.Cliente);
+                drop.append(option);
+            });
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.log("Request Failed: " + err);
+        });
+    }
+}

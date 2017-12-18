@@ -1,0 +1,51 @@
+DATAS
+http://momentjs.com/
+
+
+
+    //jQuery("#DataNotaFiscal").mask("99/99/9999");
+    //jQuery("#DataInstalacao").mask("99/99/9999");
+    //jQuery("#ValidadeGarantia").mask("99/99/9999");
+    //$("#DataNotaFiscal").val($.format.date($("#DataNotaFiscal").val(), 'dd MM yyyy'));
+    //$("#DataInstalacao").val($.format.date($("#DataInstalacao").val(), 'dd MM yyyy'));
+    //$("#ValidadeGarantia").val($.format.date($("#ValidadeGarantia").val(), 'dd MM yyyy'));
+
+//Insere o datepicker em um campo
+    $("#Id_Campo").datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    });
+
+//Recebe um valor em milissegundos e devolve em Date
+	function formatarData(milliseconds) {
+	    return new Date(milliseconds.match(/\d+/g).map(function (s) { return new Date(+s); }));
+	}
+
+//Seta a data de um campo com datepicker, neste caso com a data atual do sistema
+	$('#Id_Campo').datepicker('setDate', new Date());
+
+//Validar se um campo data foi preenchido
+
+    $("#DataChegada").change(function () {
+        validarData();
+    });
+
+    $("#DataValidade").change(function () {
+        validarData();
+    });
+
+    
+    function validarData() {
+        var dataChegada = $("#DataChegada").val();
+        if (dataChegada === "") 
+            $("#dataChegadaeSpan").show();
+        else 
+            $("#dataChegadaSpan").hide();
+
+        var dataValidade = $("#DataValidade").val();
+        if (dataValidade === "") 
+            $("#dataValidadeSpan").show();
+        else 
+            $("#dataValidadeSpan").hide();
+    }
+    

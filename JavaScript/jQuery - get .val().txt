@@ -1,0 +1,32 @@
+// Get the value from a dropdown select
+$( "select.foo option:selected").val();
+ 
+// Get the value from a dropdown select even easier
+$( "select.foo" ).val();
+ 
+// Get the value from a checked checkbox
+$( "input:checkbox:checked" ).val();
+ 
+// Get the value from a set of radio buttons
+$( "input:radio[name=bar]:checked" ).val();
+
+// Get the selected valu of a drop down
+$( "select option:selected" ).val()
+
+
+// sets selected index of a select box to the option with the value "0"
+$("select#elem").val('0'); 
+
+// sets selected index of a select box to the option with the value ""
+$("select#elem").val(''); 
+
+// sets selected index to first item using the DOM
+$("select#elem")[0].selectedIndex = 0;
+
+// sets selected index to first item using jQuery (can work on multiple elements)
+$("select#elem").prop('selectedIndex', 0);
+
+$("select#elem").prop('selectedIndex', 0);
+
+$("select#elem").attr('selectedIndex', 0);
+

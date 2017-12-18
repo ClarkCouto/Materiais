@@ -1,0 +1,21 @@
+    $(document).submit(function () {
+        if (getElement("#Salvar||#Aprovar").value === "SalvarParcialmente") {
+            if (!modalComErros) {
+                XModal.confirm("Algumas varáveis apresentam campos vazios, deseja continuar à salvar parcialmente?\nSe sim, as variáveis com erro não seram salvas.",
+                    function (resposta) { if (resposta) { modalComErros = true; $("#formEnsaio").submit(); } }, {
+                        _okButton: {
+                            innerHTML: "OK", className: "btn btn-qualistatus"
+                        }
+                    });
+                return false;
+            }
+            return true;
+        }
+
+        var verificado = true;
+        listaModalVariaveis.forEach(function (modal) {
+            if (verificado) verificado = validaModal(modal);
+            else validaModal(modal);
+        });
+        return verificado;
+    });

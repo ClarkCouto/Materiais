@@ -1,0 +1,298 @@
+*** DOMAIN
+Colocar uma lista na parcial class no Metadata
+
+public List<HistoricosUsoManutencao> listHistoricoUsoManutencao { get; set; }
+====================================================================================================================
+*** CONTROLLER
+Colocar uma ViewBag para a lista
+
+GET Create
+ViewBag.listLotesReagentes = "";
+
+POST Create
+public ActionResult Create(ReagenteViewModel reagenteViewModel, string Salvar, string listLotesReagentes)
+{
+    reagenteViewModel.Reagentes.LotesReagentes = DeserializeLotesReagentes(listLotesReagentes);
+    if (_reagenteService.Create(reagenteViewModel.Reagentes)){...}
+
+    ViewBag.listLotesReagentes = listLotesReagentes;
+}
+
+GET Edit
+ViewBag.listLotesReagentes = SerializeLotesReagentes(reagentes.LotesReagentes.ToList());
+
+POST Edit
+public ActionResult Edit(ReagenteViewModel reagenteViewModel, string Salvar, string idReagente, string listLotesReagentes)
+{
+    reagenteViewModel.Reagentes.LotesReagentes = DeserializeLotesReagentes(listLotesReagentes);
+    if (_reagenteService.Edit(reagenteViewModel.Reagentes)){}
+
+    ViewBag.listLotesReagentes = listLotesReagentes;
+}
+
+DESERIALIZE
+protected List<LotesReagentes> DeserializeLotesReagentes(string list)
+{
+    //Caso tenha data colocar a formatação
+    var serializer = new JsonSerializerSettings
+    {
+        DateFormatString = "dd/MM/yyyy"
+    };
+    return list.Equals("") ? null : JsonConvert.DeserializeObject<List<LotesReagentes>>(list, serializer).ToList();
+}
+
+SERIALIZE
+protected string SerializeLotesReagentes(List<LotesReagentes> list)
+{
+    var listValoresNominais = list.Select(l => new
+    {
+         l.idLoteReagente,
+         l.DataChegada,
+         l.DataValidade,
+         l.Embalagem_Id,
+         l.LoteReagente,
+         l.Quantidade,
+         l.QuantidadeUnitaria,
+         l.Reagente_Id,
+         l.UnidadeLote_Id
+     }).ToList();
+     return JsonConvert.SerializeObject(listValoresNominais);
+}
+====================================================================================================================
+
+***No JavaScript
+//Criar a variavel global para que seja sempre a mesma em todas as funções
+var tabelaLotesReagentes;
+
+$(document).ready(function () {
+    //Função para formatar os campos com datas
+    $(".data").datepicker({
+        format: "dd/mm/yyyy",
+        autoclose: true
+    });
+
+    //$("select").addClass('chosen-select').chosen({ no_results_text: "Nada encontrado!" })
+
+    //Função padrão para a jQuery DataTable com pesquisa ativada
+    tabelaLotesReagentes = $('#tabelaLotesReagentes').DataTable({
+        "paging": true,
+        "pageLength": 10,
+        "lengthChange": false,
+        "searching": false,
+        "info": false,
+        "aoColumns": [
+            /* idLoteReagente       */  { "bVisible": false, "bSearchable": false, "bSortable": false },
+            /* Lote_Unidade_Id      */  { "bVisible": false, "bSearchable": false, "bSortable": false },
+            /* Embalagem_Id         */  { "bVisible": false, "bSearchable": false, "bSortable": false },
+            /* QuantidadeUnitaria   */  { "bVisible": false, "bSearchable": false, "bSortable": false },
+            /* Lote Reagente        */  { "sType": "rcb-sorting" },
+            /* Quantidade           */  { "sType": "rcb-sorting", "format": "dd/mm/yyyy" },
+            /* Data Chegada         */  { "sType": "rcb-sorting", "format": "dd/mm/yyyy", },
+            /* Data Validade        */  { "sType": "rcb-sorting" }
+
+        ],
+        /*Tradução*/
+        "language": {
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próxima",
+                "first": "Primeira",
+                "last": "Última"
+            },
+            "sEmptyTable": "Sem registros",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Sem registros",
+            "sSearch": "Pesquisar"
+        }
+    });
+
+    //Faz a validação dos campos, e insere os dados na tabela
+    $("#btnAdicionarLote").click(function () {
+        $(".valida").focusout()
+        var spans = $(".spanError")
+        if (spans.text()) return;
+
+        var embalagem = $("#Embalagem_Id").val() != "-- Selecione --" ? $("#Embalagem_Id").val() : 0;
+        var loteUnidade = $("#UnidadeLote_Id").val() != "-- Selecione --" ? $("#UnidadeLote_Id").val() : 0;
+        var quantidade = $("#Quantidade").val() != "-- Selecione --" ? $("#Quantidade").val() : 0;
+        var quantidadeUnitaria = $("#QuantidadeUnitaria").val().replace(".", ",") || 0
+        var dataChegada = $("#DataChegada").val() || ""
+        var dataValidade = $("#DataValidade").val() || ""
+        var loteReagente = $("#LoteReagente").val() || ""
+
+        linha = tabelaLotesReagentes.row.add([0, embalagem, loteUnidade, quantidadeUnitaria, loteReagente, quantidade, dataChegada, dataValidade, ""]).cell().nodes();
+
+        tabelaLotesReagentes.draw()
+        linha[linha.length - 4].className = "iconRemove";
+        $(".iconRemove").click(removeElementoDaTabela)
+        $(".valida").val("")
+        //$(".data").val("")
+        $("#Embalagem_Id,#UnidadeLote_Id").trigger('chosen:updated');
+
+        $('#LoteReagente').val("");
+    })
+
+    //Chama a função para validar o campo quando o focus sai
+    $(".valida").focusout(testa)
+
+    //verifica se foi recebido algum item na ViewBag.listLotesReagentes
+    //Caso tenha sido, adiciona cada obejto em uma linha da tabela
+    if ($("#listLotesReagentes").val()) {
+        var lotesReagentes = $.parseJSON($("#listLotesReagentes").val())
+        var item;
+        var linha;
+        for (i = 0; i < lotesReagentes.length; i++) {
+            item = lotesReagentes[i];
+            linha = tabelaLotesReagentes.row.add([item.idLoteReagente, item.Embalagem_Id, item.UnidadeLote_Id, item.QuantidadeUnitaria, item.LoteReagente, item.Quantidade, item.DataChegada, item.DataValidade, ""]).cell().nodes();
+            if (/Edit|Create/.test(Action))
+                linha[linha.length - 4].className = "iconRemove";
+        }
+        tabelaLotesReagentes.draw()
+    }
+    
+    //Chama a função para remover um item da tabela
+    $(".iconRemove").click(removeElementoDaTabela)
+    //Chama a função para serializar os dados da tabela
+    $(document).submit(submitFunction)
+});
+
+//Efetua o teste para ver se oc campos foram preenchidos
+function testa() {
+    var item = $(this)
+    var span = $(item.nextAll("span")[0])
+    var id = item.attr("id")
+    valor = item.val() != "-- Selecione --" ? (item.val() ? item.val() : "") : 0;
+    var name;
+    switch (id) {
+        case "Embalagem_Id": name = "Embalagem"; break;
+        case "UnidadeLote_Id": name = "Unidade"; break;
+        case "QuantidadeUnitaria": name = "Quantidade Unitária"; break;
+        case "LoteReagente": name = "Lote"; break;
+        case "Quantidade": name = "Quantidade"; break;
+        case "DataChegada": name = "Data Chegada"; break;
+        case "DataValidade": name = "Data Validade"; break;
+    }
+    if (!valor) {
+        span.text(name + " é obrigatória.")
+        return "erro";
+    }
+    //if (valor && (/[^\d,\.]/.test(valor) || (/[\.,]/.exec(valor) != null && /[\.,]/.exec(valor).length > 1))) {
+    //    span.text("Somente numeros.")
+    //    return;
+    //}
+    span.text("")
+}
+
+//Função que serializa os itens da tabela e envia para o back
+function submitFunction() {
+    var listaLotesReagentes = [];
+    var linhas = tabelaLotesReagentes.rows().data();
+    for (i = 0; i < linhas.length; i++) {
+        listaLotesReagentes.push({
+            idLoteReagente: linhas[i][0],
+            Embalagem_Id : linhas[i][1],
+            UnidadeLote_Id: linhas[i][2],
+            QuantidadeUnitaria: linhas[i][3],
+            LoteReagente: linhas[i][4],
+            Quantidade: linhas[i][5],
+            DataChegada: linhas[i][6],
+            DataValidade: linhas[i][7],
+            Reagente_Id: $("#idReagente").val() || 0
+        })
+    }
+    $("#listLotesReagentes").val(JSON.stringify(listaLotesReagentes));
+}
+
+//Função ativada quando clicar no botão remover na tabela
+function removeElementoDaTabela() {
+    console.log(this.parentNode);
+    var lotesReagentes = tabelaLotesReagentes.row(this.parentNode).data()
+    if (verificaDependenciasLotesReagentes(lotesReagentes[0]))
+        tabelaLotesReagentes.row(this.parentNode).remove().draw(false);
+}
+
+function verificaDependenciasLotesReagentes(idLotesReagentes) {
+    //TODO logica para verificar a possibilidade de exclusão do valor nominal
+    //Deve ser feita quando os valores estiverem sendo usados por ensaios.
+    return true;
+}
+=================================================================================================================
+
+***View
+	//Após o último campo e fechar a tag "row"
+	//Título 
+ 	@*Criação dos Lotes*@
+        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3 class="control-label col-md-pull-1 col-md-3 col-sm-3 col-xs-12">Lotes</h3>
+        </div>
+
+	//Cria uma nova "row"
+        <div class="row">
+            @*Primeira Coluna Lotes*@
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">Lote:</label>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.LoteReagente, new { htmlAttributes = new { @class = "form-control valida" } })
+                        <span class="text-danger spanError" id="loteSpan"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4">Embalagem:</label>
+                    <div class="col-md-6">
+                        @Html.DropDownList("Embalagem_Id", null, "-- Selecione --", htmlAttributes: new { @class = "form-control valida" })
+                        <span class="text-danger spanError" id="embalagemSpan"></span>
+                    </div>
+                </div>
+            </div>
+
+            @*Segunda Coluna Lote*@
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="control-label col-md-4">Data Chegada:</label>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.DataChegada, new { htmlAttributes = new { @class = "form-control data valida" } })
+                        @*<span class="text-danger spanError" id="dataChegadaSpan"></span>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+	
+	//Fecha a "row" da criação do lote e abre uma nova "row" com o botão para adicionar o lote
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-1">
+                    <input type="button" value="Adicionar Lote" id="btnAdicionarLote" class="btn btn-qualistatus" />
+                </div>
+            </div>
+        </div>
+
+	//"Fecha a "row" do botão e adiciona uma nova com os dados da tabela de lotes
+        <div class="row">
+            <div class="table-responsive">
+                <table id="tabelaLotesReagentes" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="hidden">idLoteReagente</th>
+                            <th class="hidden">Embalagem_Id</th>
+                            <th class="hidden">UnidadeLote_Id</th>
+                            <th class="hidden">QuantidadeUnitaria</th>
+                            <th class="col-md-1 col-sm-1 col-xs-1"> Lote Reagente </th>
+                            <th class="col-md-1 col-sm-4 col-xs-4"> Quantidade    </th>
+                            <th class="col-md-2 col-sm-1 col-xs-1"> Data Chegada  </th>
+                            <th class="col-md-2 col-sm-1 col-xs-1"> Data Validade </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>

@@ -1,0 +1,4 @@
+***Utilizando Condição Ternária
+Verifica se o telefone1 é nulo (se for busca o telefone2 e verifica se é nulo, se for preenche com "", se não preenche com o número), se não preenche com o número
+
+Telefone = c.Telefone1 == null ? (c.Telefone2 == null ? "" : c.Telefone2) : c.Telefone1;

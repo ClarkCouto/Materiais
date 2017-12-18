@@ -1,0 +1,123 @@
+***ALTERAR NO Web.Config DENTRO DO <system.web> COLOCAR:
+
+    <customErrors mode="On" defaultRedirect="Erro">
+      <error statusCode="403"
+             redirect="SemPermissao" />
+      <error statusCode="404"
+             redirect="PaginaNaoEncontrada" />
+    </customErrors>
+
+***Criar o ErroController
+
+    public class ErroController : Controller
+    {
+        public ActionResult Erro(Exception exception)
+        {
+            ViewBag.Erro = exception.Message;
+            return View("Erro");
+        }
+
+        public ActionResult PaginaNaoEncontrada()
+        {
+            return View("PaginaNaoEncontrada");
+        }
+
+        public ActionResult SemPermissao()
+        {
+            return View("SemPermissao");
+        }
+
+    }
+
+
+***NO Global.asax.cs ACRESCENTAR 
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            var app = (MvcApplication)sender;
+            var context = app.Context;
+            var ex = app.Server.GetLastError();
+            context.Response.Clear();
+            context.ClearError();
+
+            var httpException = ex as HttpException;
+
+            var routeData = new RouteData();
+            routeData.Values["controller"] = "Erro";
+            routeData.Values["action"] = "Erro";
+
+            if (httpException != null)
+            {
+                switch (httpException.GetHttpCode())
+                {
+                    case 302:
+                        routeData.Values["action"] = "SemPermissao";
+                        break;
+                    case 404:
+                        routeData.Values["action"] = "PaginaNaoEncontrada";
+                        break;
+                    case 500:
+                        routeData.Values["action"] = "Erro";
+                        routeData.Values["exception"] = ex;
+                        break;
+                }
+            }
+            
+            Response.TrySkipIisCustomErrors = true;
+            IController controller = new ErroController();
+            controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
+            Response.End();
+        }
+
+
+***MODELOS DE PÁGINAS DE ERRO - COLOCAR NA PASTA SHERED***
+
+--ERRO MOSTRANDO AS EXCEPTIONS GERADAS
+
+@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Erro!";
+}
+
+<h3 class="text-danger">@ViewBag.Title</h3>
+<h4 class="text-muted">Um erro ocorreu durante o processamento de sua solicitação!</h4>
+<h4 class="text-muted">Tente novamente e caso o erro persista entre em contato com o administrador do sistema.</h4>
+@{
+    if (@Model != null && @Model.Exception != null)
+    {
+        <h3 class="text-danger">Exception: @Model.Exception.Message</h3>
+        <h3>Stack Trace: @Model.Exception.StackTrace</h3>
+    }
+}
+
+@*Descomentar para mostrar o que gerou o erro*@
+<h4 class="text-danger">@(!String.IsNullOrEmpty(ViewBag.Erro) ? ViewBag.Erro : ""):</h4>
+
+
+--ERRO PÁGINA NÃO ENCONTRADA
+
+@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Erro!";
+}
+
+<h3 class="text-danger">@ViewBag.Title</h3>
+<h4 class="text-muted">Um erro ocorreu durante o processamento de sua solicitação!</h4>
+<h4 class="text-muted">A página que você está tentando acessar não existe!</h4>
+<h4 class="text-muted">Verifique os dados e tente novamente.</h4>
+<h4 class="text-muted">Caso o erro persista entre em contato com o administrador do sistema.</h4>
+
+-- ERRO SEM PERMISSÃO
+
+@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Erro!";
+}
+
+<h3 class="text-danger">@ViewBag.Title</h3>
+<h4 class="text-muted">Você não possui permissão para executar esta ação!</h4>
+<h4 class="text-muted">Para mais informações entre em contato com o administrador do sistema.</h4>
+

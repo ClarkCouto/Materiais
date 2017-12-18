@@ -1,0 +1,3 @@
+*** LINK PARA REDIRECIONAR PARA OUTRA CONTROLLER
+	@Html.ActionLink("Detalhes", "Details", "Formula", new { id = item.idFormula }, null) 
+					//linkText, actionName, controllerName, routeValues, htmlAttributes

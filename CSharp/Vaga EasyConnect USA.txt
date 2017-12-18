@@ -1,0 +1,349 @@
+
+
+Conheça a Easy: clique aqui!
+
+
+CRUD - Especificações
+
+Descrição do exercício prático
+Criar uma aplicação para realizar o cadastro de programadores da empresa Easycomtec. O cadastro deve conter todos os campos do formulário   https://www.easycomtec.com/talents
+Pode ser algo simples. O objetivo do exercício é apenas separar o cara que fala que sabe e nem consegue o básico, daqueles que sabem.
+
+Qual é o período ou prazo para o treinamento?
+Cada pessoa tem o seu tempo de aprendizado, então não há um tempo específico, e sempre estamos contratando novos programadores.
+
+Como e para quem devo enviar quando estiver pronto?
+Gravar um vídeo mostrando seu projeto detalhadamente, com base nos critérios apontados neste documento, para que possamos avaliar com maior precisão e enviar o link do YouTube para ana.menici@easycomtec.com , alexandra@easycomtec.com ou carolina@easycomtec.com e enviaremos o resultado em seguida.
+
+
+Tecnologias a serem utilizadas
+Asp.Net (MVC ou Core)
+Aurelia ou Angular (1 ou 2)
+Entity Framework
+SQL Server
+
+Tecnologias adicionais
+Selenium (Utilizado para Testes)
+
+Critérios de avaliação
+Requisito mínimo para aprovação: 80 pontos
+Pontuação Máxima: 150 (100 pontos + 50 bônus)
+Regra de negócio (30 pts ~ 50 pts)
+O sistema é sobre gerenciamento de talentos da Easy. (+5)
+C: É possível cadastrar os candidatos (+5)
+R: É possível listar os candidatos. (+5)
+U: É possível alterar as informações de um candidato. (+5)
+D: É possível deletar um candidato. (+5)
+Os campos relacionados ao candidato são os mesmos do documento na descrição. (+5)
+Nos impressione, o que você acha que falta nesse sistema? O que seria legal se tivesse? Use sua criatividade. (Até +20)
+Estrutura de código (10 pts)
+Nomenclatura das classes, métodos e variáveis. (+5)
+Divisão dos projetos, organização das classes. (+5)
+Backend (10 pts)
+.NET; ou 
+.NET Core
+Frontend (5 pts)
+Angular 1; ou
+Angular 2; ou
+Aurelia
+Banco de dados (45 pts)
+Entity Framework (+10)
+SQL Server (+5)
+Nomenclatura das tabelas considerando a regra de negócio adotada (+5)
+Relacionamento entre tables (chaves estrangeiras) correto (+10)
+Utilizou Seed method para inicializar a base de dados ao rodar Update-Database (+15)
+Testes (30 pts)
+Unitário (+15)
+Selenium (+15)
+
+Google Chrome Developer (5 pts)
+Enviar screenshot de tela mostrando o chrome developer na aba de network (+5)
+
+
+Referências
+Music Store + .Net Core
+Building your first ASP.NET Core
+3 artigos incríveis para aprender aspnet mvc 
+Getting started with ASP.NET Core MVC and Entity Framework Core using Visual Studio
+Google Developer Network
+
+Projeto de exemplo
+https://github.com/rafaelkds/TesteEasy 
+
+Se for constatado cópia parcial ou completa do projeto acima, o candidato está sujeito a ser rejeitado.
+
+Cursos Gratuitos
+http://moodle.easycomtec.com
+
+
+
+
+
+Portuguese > Page 5
+
+
+English Version
+
+Hi Geek! 
+
+Thank you for participate in our team! 
+
+If you want to follow communicated to the developers of this group (anyone can join): https://groups.google.com/forum/#!forum/easy-developers
+
+If you already have company email in our group the idea is to discuss ideas for improving the company: https://groups.google.com/forum/#!forum/easy-communication-technology
+
+Skype Training Group: https://join.skype.com/vk2Hi10IlrDr
+Whatsapp https://chat.whatsapp.com/invite/4VAl3Euwwro9rg4TtFqAKn
+Tutorials: 
+We have some tutorials with the technologies we use:
+HTML: http://www.w3schools.com/html/default.asp
+CSS: http://www.w3schools.com/css/default.asp
+AngularJs: http://www.w3schools.com/angular/default.asp
+Google Chrome https://www.youtube.com/watch?v=7cqh7MGLgaM&list=PLB9EC47A6AAE4540F
+Asp.Net https://www.youtube.com/playlist?list=PLTHIfO0UrihExHVtUgcb_RQe1Rqotlz-P
+
+General (Asana, TFS, How we work)  https://www.youtube.com/playlist?list=PLTHIfO0UrihGw_DFD6YFnVAHTffpohoGe
+
+Easy Builder - Our Scaffolding - https://www.youtube.com/playlist?list=PLTHIfO0UrihGXWtezzJnmZgS74lfA3PdH 
+Technologies that we are using:
+Azure - DevOps
+SQL Server Azure
+Asp.net MVC 5
+Asp.Net Web API
+AngularJs 1.5
+AngularJs 5
+Typescript
+Unit Test
+Unit of Work - Dependency of Injection
+E2E Selenium
+TFS - Git
+Scrum
+Tools: 
+We use VS 2017 Ultimate Community and TFS, email with Gmail domain company.
+To arrange tasks use Asana, in the style similar to Scrum.
+https://www.youtube.com/watch?v=nt_Fzf8g3a0&index=3&list=PLTHIfO0UrihGw_DFD6YFnVAHTffpohoGe
+
+To create the signature company, please send a photo (which has not beer glass, girlfriend, others in the picture) and send to design@easycomtec.com
+
+
+Time / Hours: 
+A minimum of 20 hours is what we ask (if you have availability 44 hours per week), because less than this jeopardizes the progress of the projects. These hours are flexible, remember that sometimes not to work 100% of dawn because you will probably need to talk to the rest of the team to align the progress of tasks. These hours are identified using TimeDoctor. https://www.timedoctor.com
+I want to start. What do I do?
+1 - Salary agreement
+2 - Create a CRUD (create, update, delete) and share with us on github and send a video explaining the application and code (showing chrome developer). Can be something simple asp.net + angularjs, the goal is only make sure that you know the technologies that we use. Any type of database.
+3 - Create your own TimeDoctor to track the first day of work
+4 - Added on our Skype group - Easy
+5 - Make a generally one-month trial to give a notion of productivity
+6 - Send an image to create your email
+7 - Set up your account at Easy TimeDoctor
+
+
+
+Payment: 
+We usually do monthly payments, in the first week of the month using paypal. If you prefer to use a different payment method, let us know.
+
+Taking account please send the information below to financeiro@easycomtec.com
+
+Benefits:
+
+20 hours worked per week, the employee earns 1 hour of study at Duolingo and $ 100 of gym Voucher. However, in order to win this Voucher, the person must attend at least 10 times a month at the gym and prove by check in on Facebook.
+Each week that exceeds 30 hours worked, there is a bonus of $ 25.00.
+Every 10 hours of work completed, the employee is entitled to one hour of study in Technology (received in cash, according to its hour value, in the salary of the following month).
+
+P.S.:The employee can have the benefits  after the period of experience. 
+
+Common questions:
+1 - It is a real company?
+The company was founded in 2003
+
+2 - The company is confident about the payment?
+We have professionals working with us for over 6 years. Check the size of our customers, the company would not be sustainable if you do not pay on days those who help to grow.
+My goal is to create a company that satisfaction / pride for those who work in the company, the payment of salary is the minimum to achieve this. Think about it, with all the exposure on social networks, only one employee to stay without getting everyone would already know.
+
+3 - Nobody passed me task, you work for me?
+The company has not defined hierarchy, ie who has more knowledge and availability takes on the project, so the projects are not centralized in one person. So at the start time if you are new ends up in a vacuum, because the staff is not sure yet what you know, one needs to organize the tasks to be able to delegate to you, you need to take time to teach the TFS environment etc. . Take this time to study the technologies of tutorials and be bothering the people who ate someone you in any task.
+
+4 - If I have no job can be pointing in timedoctor?
+Because working remote is hard to manage downtime in such cases the person really is no point hours and in consequence do not receive. Once a person starts to get tasks will hardly be idle for lack of work, just is if instead of talking to who is delegating tasks in advance, but warns that needs more work when it ends. In these cases is complicated, because you can just end at the time the other person is offline for example, the ideal is to always seek to have some scheduled tasks.
+
+5 - I spent a task that I have no experience and I think I will take twice as long as normal, but no problem since I get an hour, right?
+Wrong, all notes are passed on to customers, so if you think that task is not quite your thing, then better to ask for help or go to someone. The idea of teamwork is to become more productive, but we ended up getting more expensive than individual freelances, there is meaningless to have company.
+
+
+6 - What are the requirements to get started?
+You need to know the language we are using in the projects, today mainly Asp.Net MVC, AngularJS and Php. After the combined salary you will be added to the group of developers in Skype, where one of the coordinators of the projects can allocate you in a project. They pass you any real test (maximum 20 hours), which should have the indicated hours (pick up model who is passing the test) in excel, being approved, will create your email, add your account in Asana and TimeDoctor.
+https://www.youtube.com/watch?v=nt_Fzf8g3a0&index=3&list=PLTHIfO0UrihGw_DFD6YFnVAHTffpohoGe
+
+How to integrate with Timedoctor Asana - http://support.timedoctor.com/support/solutions/articles/5000518336-how-to-integrate-asana-with-time-doctor
+How to export the hours report Timedoctor:  http://support.timedoctor.com/support/solutions/articles/5000570480-project-report-overview-time-doctor
+
+
+To start you can call me on Skype (fernando.magno) to talk, combine salary etc.
+
+
+Those responsible for the projects are: Gillian, Bruno e Jurandir.
+
+
+Then you get that coffee and start modifying!
+
+Be very welcome!
+
+Fernando Magno
+Skype: fernando.magno
+Whatsapp +1 954860 2712
+https://www.linkedin.com/in/fmagno
+
+Versão em Português
+
+Olá Geek! 
+
+Primeiramente quero agradecer por acreditar na Easy! 
+
+E te convido a assistir nossos vídeos no YouTube para entender melhor o que fazemos, como pensamos e o que buscamos - www.youtube.com/easycomtec
+
+
+
+Assista a esse video: https://www.youtube.com/watch?v=UEaN1W1nDPw
+Skype Training Group: https://join.skype.com/vk2Hi10IlrDr
+Whatsapp https://chat.whatsapp.com/invite/4VAl3Euwwro9rg4TtFqAKn
+
+Esses grupos servem para as pessoas interessadas em participar dos projetos da Easy, são grupos de estudo onde o pessoal debate, trocam ideias, documentos, links (Inclusive links de tutoriais da própria Easy, onde já te direciona para o que ela precisa) e por aí vai.
+Conforme o pessoal vai se sentindo mais confiante e confortável, pode fazer o projeto CRUD no github e depois, já fala solicita para realizar o período de testes para então vir a integrar a equipe de desenvolvedores da Easy.
+
+
+Caso você queira acompanhar os comunicados para os desenvolvedores, entre neste grupo (todos podem participar) : https://groups.google.com/forum/#!forum/easy-developers
+
+Caso você já tenha o email da Easy, no nosso grupo a ideia é debater ideias para melhorar a empresa: https://groups.google.com/forum/#!forum/easy-communication-technology
+Projeto Teste: https://docs.google.com/document/d/1tL53rWZLKIZXcgFCjopd79fPvlcbgzK4uD9khZLNsyc/edit
+Tutoriais:
+Nós temos alguns tutoriais sobre as tecnologias que utilizamos, sugiro estudar nesta ordem: 
+
+HTML: http://www.w3schools.com/html/default.asp
+CSS: http://www.w3schools.com/css/default.asp
+AngularJs: http://www.w3schools.com/angular/default.asp
+Angularjs Portugues: https://www.youtube.com/watch?v=_y7rKxqPoyg&list=PLQCmSnNFVYnTD5p2fR4EXmtlR6jQJMbPb
+Google Chrome https://www.youtube.com/watch?v=7cqh7MGLgaM&list=PLB9EC47A6AAE4540F
+Asp.Net https://www.youtube.com/playlist?list=PLTHIfO0UrihExHVtUgcb_RQe1Rqotlz-P
+Selenium + C#: http://executeautomation.com/blog/functional-tools/selenium-automation-with-c/
+
+Geral (Asana, TFS, Como são nossos projetos, etc) https://www.youtube.com/playlist?list=PLTHIfO0UrihGw_DFD6YFnVAHTffpohoGe
+Nosso scaffolding - https://www.youtube.com/playlist?list=PLTHIfO0UrihGXWtezzJnmZgS74lfA3PdH 
+
+
+Caso você ache que é muito conteúdo: https://youtu.be/Qj6mQSdBSGI?t=3m41s
+
+
+
+Tecnologías que estamos utilizando:
+Azure - DevOps
+SQL Server Azure
+Asp.net MVC 5
+Asp.Net Web API
+AngularJs 1.5
+AngularJs 5
+Typescript
+Unit Test
+Unit of Work - Dependency of Injection
+E2E Selenium
+TFS - Git
+Scrum
+Ferramentas: 
+Utilizamos VS 2015 Ultime Community e TFS, email do Gmail com o domínio da empresa. 
+Para organizar as tarefas utilizamos Asana, no estilo parecido com o SCRUM.
+
+https://www.youtube.com/watch?v=nt_Fzf8g3a0&index=3&list=PLTHIfO0UrihGw_DFD6YFnVAHTffpohoGe
+
+Para criar a assinatura da empresa, favor enviar uma foto (que não tenha copo de cerveja, namorada, outras pessoas na foto) para design@easycomtec.com
+Tempo/Horário/Carga Horária: 
+Um mínimo de 20 horas por semana (44, caso você tenha disponibilidade). Menos que isso, comprometemos o andamento dos projetos. Essas horas são flexíveis, lembrando que algumas vezes não será possível trabalhar 100% de madrugada porque você provavelmente vai precisar conversar com o restante da equipe para alinhar o andamento das tarefas. 
+
+Feriados já estão considerados quando fazemos o valor/hora, fazemos baseado nas horas de trabalho no ano, logo as horas não são calculadas no mês do feriado, mas sim distribuído nas horas do ano todo, em contrapartida caso você prefira trabalhar no feriado você vai receber pelas horas de trabalho. Essas horas são apontadas utilizando o TimeDoctor. https://www.timedoctor.com
+
+Contratação CLT, Contrato/Freelancer?
+Geralmente começamos com um projeto de cerca de 1 mês para te dar a oportunidade se acostumar a trabalhar remotamente. Fazemos isso também para garantir que você vai conseguir se adaptar a se comunicar primariamente por Skype e WhatsApp e responder a demandas de clientes (algumas vezes em inglês). Além disso verificamos se você está apto a trabalhar em equipe. 
+
+Passando da primeira fase, você poderá continuar como freelancer ou optar pela contratação CLT. Para isso são enviado os documentos por carta registrada para Joinville, onde é feito o registro é enviado de volta para você.
+
+http://www.calculador.com.br/calculo/custo-funcionario-empresa
+Quero começar. O que faço?
+combinar valor/hora ou salário (varia de acordo com o nível de experiência)
+ser adicionado no grupo do Skype da Easy
+fazer um CRUD (create, update, delete) e compartilhar pelo github e enviar screenshot de tela mostrando o chrome developer na tela de network. Pode ser algo simples, no caso asp.net + angularjs o objetivo é apenas separar o cara que fala que sabe e nem consegue o básico.Pode ser feito em qualquer banco de dados.
+Fazemos o primeiro mês como período de experiência para dar uma noção da sua produtividade e confirmar o salário
+enviar uma imagem para criar seu e-mail
+configurar sua conta no TimeDoctor da Easy
+
+
+Pagamento: 
+Geralmente fazemos pagamentos mensais, na primeira semana do mês por uma conta no Itaú. Caso não tenha, pedimos que abra uma. A conta poupança é gratuita.
+
+Tendo a conta, favor atualizar os dados no final do form www.easycomtec.com/talents 
+
+Nome completo: 
+Agência:
+Conta:
+CPF:
+Banco: 
+Código do Banco:
+
+Para quem tiver mais de 6 meses de empresa, bônus sobre os lucros dos projetos. 
+
+Benefícios:
+
+Fazendo 20 horas de trabalho/semana, o funcionário ganha uma hora de estudo no Duolingo e  R$100 de vale academia. Porém para ganhar esse Voucher a pessoa precisa frequentar pelo menos 10 vezes no mês a academia e comprovar através do check in no Facebook.
+A cada semana que ultrapassar 30 horas trabalhadas, há um bônus de R$25,00.
+A cada 10 horas de trabalho completadas, o funcionário tem direito a uma hora de curso de estudo em Tecnologia (recebe em dinheiro, conforme seu valor hora, no salário do mês seguinte).
+
+Obs: Os benefícios passam a valer após o tempo de experiência. 
+
+Perguntas Frequentes:
+1 - É uma empresa de verdade?
+Sim, a abertura da empresa foi em 2003 (quando eu (Magno) tinha 17 anos). CNPJ 05.700.792/0001-20
+2 - Preciso pagar algo. Comprar algum curso etc?
+Não cobramos nada pela orientação. Nosso objetivo é capacitar profissionais do ramo para termos pessoal de qualidade para trabalhar conosco. E com isso, entregar projetos de qualidade aos nossos clientes no processo.
+3 - A empresa é confiável com relação a pagamento? 
+Temos profissionais que trabalham conosco a mais de 6 anos. Confira o tamanho dos nossos clientes. Nossa empresa não seria sustentável se não pagássemos em dias aqueles que a ajuda a crescer.
+
+O meu objetivo é criar uma empresa que de satisfação e orgulho a aqueles que trabalham na nela. O pagamento do salário é o mínimo para se alcançar isso. Pense um pouco - com toda a exposição nas redes sociais, se apenas 1 funcionário ficasse sem receber todos ficariam sabendo.
+4 - Ninguém me passou tarefa. Tem trabalho para mim?
+A empresa não tem hierarquia definida. Ou seja, quem tem mais conhecimento e disponibilidade assume o projeto, então os projetos não ficam centralizados em uma só pessoa. No começo, se você é novo, acaba ficando no vácuo, porque o pessoal não sabe ao certo ainda o que você sabe. Nossa equipe precisa organizar as tarefas para poder delegar para você, precisa tirar um tempo para ensinar o ambiente do TFS, etc. Aproveite esse tempo para estudar as tecnologias dos tutoriais e fique incomodando o pessoal até que alguém te de uma tarefa.
+
+5 - Se eu não tiver tarefa posso ficar apontando no timedoctor?
+Pelo fato de se trabalhar remoto, é difícil gerenciar tempo ocioso. Nesses casos realmente a pessoa fica sem apontar horas, e por consequência não recebe. Depois que a pessoa começa a pegar tarefas, dificilmente vai ficar ocioso por falta de tarefa. Só fica se ao invés de conversar com quem está delegando as tarefas com antecedência, só avisa que precisa de mais tarefa quando termina. Nesses casos fica complicado, porque voce pode terminar justamente na hora que a outra pessoa está offline por exemplo, o ideal é sempre buscar ter algumas tarefas agendadas.
+6 - Me passaram uma tarefa que eu não tenho experiência e acho que vou levar o dobro do tempo que o normal. Mas não tem problema já que recebo por hora, certo?
+Errado, todos os apontamentos são repassados para os clientes, então se você acha que aquela tarefa não é muito a sua praia, melhor pedir ajuda ou passar para alguém. A ideia de trabalhar em equipe é nos tornamos mais produtivos, senão acabamos ficando mais caros do que freelances individuais e perde-se o sentido da organização.
+7 - Ao final do treinamento vou conseguir executar  as tarefas?
+Com certeza, antes mesmo de terminar você já poderá começar a trabalhar conosco.
+
+8 - Qual é o período ou prazo para o treinamento?
+Cada pessoa tem o seu tempo de aprendizado, então não há um tempo específico, e sempre estamos contratando novos programadores.
+
+9- Há possibilidades de sponsor na Easy nos EUA? 
+Sim, existe essa possibilidade,  essas vagas poderão ser destinadas para os melhores funcionários com Inglês fluente.
+
+10- Tenho que usar obrigatoriamente o Visual Studio 2015?
+Sim. Existem alguns projetos que dá pra usar o VS core, mas em sua maioria usamos o VS 2015. Não podendo usar uma versão diferente.
+11 - Quais os requisitos para começar?
+Você precisa conhecer as linguagens que estamos usando nos projetos. Hoje trabalhamos bastante com Asp.Net MVC, AngularJs e PHP. Primeiramente faça um CRUD (Create, Update, Delete) e enviar as telas do networking do chrome developer. Depois de combinado o salário, você será adicionado no grupo de desenvolvedores no Skype, onde um dos coordenadores dos projetos poderá te alocar em um projeto. Eles te passarão algum teste real (máximo 20 horas), que deve ter as horas apontadas no timedoctor. 
+https://www.youtube.com/watch?v=nt_Fzf8g3a0&index=3&list=PLTHIfO0UrihGw_DFD6YFnVAHTffpohoGe
+
+Como integrar Timedoctor com Asana - http://support.timedoctor.com/support/solutions/articles/5000518336-how-to-integrate-asana-with-time-doctor
+
+Como exportar o relatorio do Timedoctor:  http://support.timedoctor.com/support/solutions/articles/5000570480-project-report-overview-time-doctor
+
+Para começar pode me chamar a Alexandra no Skype (alexandra.ribeiro9) Whatsapp (+55 31 97576-8805 ou +55 11 98120-2946),  Ana no Skype (live:eeb8576e91dbeedf ) ou Carolina Skype: Kerols2005@hotmail.com)para conversar, combinar salário etc.
+
+Os responsáveis pelos projetos são: Gilian, Bruno e Jurandir.
+
+Depois é pegar aquele café e começar a codificar! 
+
+Seja muito bem vindo!
+
+Fernando Magno
+Skype: fernando.magno
+Whatsapp +1 954860 2712
+https://www.linkedin.com/in/fmagno
+
+
+                             
+

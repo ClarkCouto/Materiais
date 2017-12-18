@@ -1,0 +1,51 @@
+*** NA VIEW
+
+    @* Modal para confirmar alteração de marca*@
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="warning-Marca-Alterada">
+        <div class="modal-dialog modal-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">A Marca selecionada é diferente da marca cadastrada nos demais lotes deste Reagente, caso prossiga os lotes anteriores serão apagados. Gostaria de continuar com a alteração da Marca?</h4>
+                </div>
+                <div class="modal-body text-center">
+                    <input type="button" value="Continuar" class="btn btn-qualistatus" onclick="substituirMarca()" data-dismiss="modal" />
+                    &nbsp;
+                    <input type="button" value="Cancelar" class="btn btn-qualistatus" onclick="manterMarca()" data-dismiss="modal" />
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+***NO JS
+
+	//Faz a validação do campo Marca para não permitir o cadastramento de lotes de marcas diferentes em um mesmo Reagente
+	$("#Marca_Id").change(function () {
+	    if ($("#marcaAnterior").val() == "") {
+	        $("#marcaAnterior").val($(this).val());
+	    }
+	    else {
+	        $("#warning-Marca-Alterada").modal('show');
+	    }
+	})
+
+	//Caso o usuário clique para manter a marca atual
+	manterMarca = function () {
+	    $("#Marca_Id").val($("#marcaAnterior").val());
+	}
+
+	//Caso o usuário realmente deseje alterar a marca
+	substituirMarca = function () {
+	    apagarLotes();
+	    $("#marcaAnterior").val($("#Marca_Id").val());
+	}
+
+	//Apagar todos os lotes cadastrados com a marca anterior
+	function apagarLotes(){
+	    var linhas = tabelaLotesReagentes.rows().data();
+	    for (i = 0; i < linhas.length; i++) {
+	        tabelaLotesReagentes.row(i).remove().draw(false);
+	    }
+	};
+

@@ -1,0 +1,6 @@
+***SETAR O VALOR DE UMA TEXTAREA
+$("#IdTextArea").val(data[0].PrecaucoesAnaliticas);
+or
+$("textarea#IdTextArea").html(result.exampleMessage)
+or
+$("textarea#IdTextArea").text(result.exampleMessage)
