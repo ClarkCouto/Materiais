@@ -1,0 +1,152 @@
+http://www.json.org/
+
+https://www.oficinadanet.com.br/artigo/asp.net/asp_net_javascriptserializer_json_em_c
+
+
+JQuery
+
+http://api.jquery.com/jQuery.getJSON/
+
+//Busca elementos JSON
+
+$.getJSON('ajax/test.json', function(data) {
+  var items = [];
+
+  if(typeof data !== 'object') {
+    // Erro!
+  }
+
+  $.each(data, function(key, val) {
+    items.push('<li id="' + key + '">' + val + '</li>');
+  });
+ 
+  $('<ul/>', {
+    'class': 'my-new-list',
+    html: items.join('')
+  }).appendTo('body');
+});
+
+//Verifica se o que está sendo retornado é realmente um objeto JSON
+$.getJSON(url, function(data)) {
+  if(typeof data !== 'object') {
+    // Erro!
+  }
+});
+
+https://msdn.microsoft.com/en-us/library/cc836466(v=vs.94).aspx
+
+INNER JOIN
+https://www.oficinadanet.com.br/artigo/asp.net/fazendo-inner-join-e-left-join-com-linq-no-aspnet
+
+
+
+CRIANDO UM OBJETO JSON
+
+https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+
+
+//CRIA UM OBJETO JSON NO FRONT PARA ENVIAR OS DADOS AO BACK (Utiliza-se o JSON.stringfy)
+
+var SerializaModais = () => JSON.stringify(
+    listaModalVariaveis.reduce(function (array, modal) {
+        if (modal !== undefined)
+            array[Number(modal.getElement(".Variavel_id")[0].value)] = {
+                idEnsaioDetalhe: modal.getElement(".idEnsaioDetalhe")[0].value,
+                Instrumento_id: modal.getElement(".Instrumento_id")[0].value,
+                Variavel_id: modal.getElement(".Variavel_id")[0].value,
+                Valor: modal.getElement(".Valor")[0].value,
+                Data: modal.getElement(".Data")[0].value,
+                Observacoes_Analista: modal.getElement(".Observacoes_Analista")[0].value,
+                Observacoes_Revisor: modal.getElement(".Observacoes_Revisor")[0].value,
+                QuantidadeEstoqueUtilizada: modal.getElement(".QuantidadeEstoqueUtilizada")[0].value
+            };
+        return array;
+    }, [])
+);
+
+
+
+
+
+EXEMPLO DE UTILIZAÇÃO DO STRINGFY
+
+function replacer(key, value) {
+  if (typeof value === "string") {
+    return undefined;
+  }
+  return value;
+}
+
+var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
+var jsonString = JSON.stringify(foo, replacer);
+
+//The resulting JSON string is {"week":45,"month":7}.
+
+
+***EXAMPLE WITH AN ARRAY
+
+If replacer is an array, the array's values indicate the names of the properties in the object that should be included in the resulting JSON string.
+
+JSON.stringify(foo, ['week', 'month']);  
+// '{"week":45,"month":7}', only keep "week" and "month" properties
+
+
+The space argument
+
+The space argument may be used to control spacing in the final string. If it is a number, successive levels in the stringification will each be indented by this many space characters (up to 10). If it is a string, successive levels will indented by this string (or the first ten characters of it).
+
+JSON.stringify({ a: 2 }, null, ' ');
+// '{
+//  "a": 2
+// }'
+Using a tab character mimics standard pretty-print appearance:
+
+JSON.stringify({ uno: 1, dos: 2 }, null, '\t');
+// returns the string:
+// '{
+//     "uno": 1,
+//     "dos": 2
+// }'
+
+
+
+
+Getting JSON 
+
+public ActionResult ArtistSearch(string q) {  
+	var artists = GetArtists(q);   
+	return Json(artists, JsonRequestBehavior.AllowGet); 
+}
+
+Now you’ll need to change the script to expect JSON instead of HTML. 
+jQuery provides a method named getJSON that you can use to retrieve the data:
+
+$("#artistSearch").submit(function (event) {   
+	event.preventDefault();
+	var form = $(this);   
+	$.getJSON(form.attr("action"), form.serialize(), function (data)       // now what?   
+	}); 
+});
+
+
+
+http://www.w3schools.com/json/default.asp
+
+
+//Criar um array em JSON
+var text = '{ "employees" : [' +
+'{ "firstName":"John" , "lastName":"Doe" },' +
+'{ "firstName":"Anna" , "lastName":"Smith" },' +
+'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+//Converter o JSON para JavaScript
+var obj = JSON.parse(text);
+
+//Usar o JSON trasnformado em JavaScript na página
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+</script>
+

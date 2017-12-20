@@ -1,0 +1,23 @@
+Selectors
+http://www.w3.org/TR/css3selectors/
+
+$("#header") Find the element with an id of "header"
+$(".editor-label") Find all elements with a class name of ".editor-label"
+$("div") Find all <div> elements
+$("#header div") Find all <div> elements that are descendants of the element with an id of "header"
+$("#header > div") Find all <div> elements that are children of the element with an id of "header"
+$("a:even") Find evenly numbered anchor tags
+
+$("[name='<NOME_DESEJADO>']"); Busca pelo nome
+
+SELETOR JQUERY PARA INPUT RADIO NOME VALOR
+$('input:radio[name="nomequalquer"][value="valor"]').attr("checked",true);
+
+CLIENT-SIDE VALIDATIONS
+É preciso incluir 
+@section Scripts {    @Scripts.Render("~/bundles/jqueryval") }
+
+
+***Métodos de Arrays em Jquery
+
+https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce

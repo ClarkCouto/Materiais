@@ -1,0 +1,41 @@
+INFORMA O BOTÃO QUE FOI CLICADO
+<!DOCTYPE html>
+<html>
+<body>
+<p>Click the button to display a confirm box.</p>
+<button onclick="myFunction()">Try it</button>
+<p id="demo"></p>
+<script>
+function myFunction() {
+    var x;
+    if (confirm("Press a button!") == true) {
+        x = "You pressed OK!";
+    } else {
+        x = "You pressed Cancel!";
+    }
+    document.getElementById("demo").innerHTML = x;
+}
+</script>
+</body>
+</html>
+==================================================================================================================
+UTILIZA O TEXTO DIGITADO PELO USUÁRIO
+<!DOCTYPE html>
+<html>
+<body>
+<p>Click the button to demonstrate the prompt box.</p>
+<button onclick="myFunction()">Try it</button>
+<p id="demo"></p>
+<script>
+function myFunction() {
+    var person = prompt("Please enter your name", "Harry Potter");
+    
+    if (person != null) {
+        document.getElementById("demo").innerHTML =
+        "Hello " + person + "! How are you today?";
+    }
+}
+</script>
+</body>
+</html>
+==================================================================================================================
